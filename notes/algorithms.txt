@@ -1,0 +1,2 @@
+Consider looking at the slides here: https://mlss.soe.ucsc.edu/sites/default/files/malik-lec2.pdf
+See section on Multiclass SVM: http://en.wikibooks.org/wiki/Support_Vector_Machines
