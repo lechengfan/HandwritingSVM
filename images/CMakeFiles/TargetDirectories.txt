@@ -1,1 +1,1 @@
-/Users/quan/desktop/HandwritingSVM/images/CMakeFiles/NoiseAdding.dir
+/root/HandwritingSVM/images/CMakeFiles/NoiseAdding.dir
