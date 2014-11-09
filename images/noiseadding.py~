@@ -1,5 +1,0 @@
-from cv2.cv import *
-import numpy as np
-
-image = imread('plus.png',0)
-imshow('image', image)
