@@ -12,7 +12,7 @@ using namespace std;
 int main(int argc, char ** argv) {
   
   if(argc!=2) {
-    cout << "Usage: ./resizeImage filename" << endl;
+    cout << "Usage: display_image" << endl;
     exit(-1);
   }
   
@@ -29,14 +29,8 @@ int main(int argc, char ** argv) {
   int height = originalSize.height;
   int max = std::max(width, height);
   double ratio = 128.0/max;
-  Size size(128, 128);
-  if(ratio>1) { //enlarge
-    resize(imOrig, imResized, Size(), ratio, ratio,  CV_INTER_CUBIC);
-  }
-  else {//shrink
-    resize(imOrig, imResized, Size(), ratio, ratio,  CV_INTER_AREA);
-  }
- 
+  //Size size(128, 128);
+  resize(imOrig, imResized, Size(), ratio, ratio,  CV_INTER_AREA);
   imwrite("resized"+filename, imResized);
   return 0;
 }
