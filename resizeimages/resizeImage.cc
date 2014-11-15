@@ -30,13 +30,15 @@ int main(int argc, char ** argv) {
   int max = std::max(width, height);
   double ratio = 128.0/max;
   Size size(128, 128);
-  if(ratio>1) { //enlarge
-    resize(imOrig, imResized, Size(), ratio, ratio,  CV_INTER_CUBIC);
-  }
-  else {//shrink
-    resize(imOrig, imResized, Size(), ratio, ratio,  CV_INTER_AREA);
-  }
- 
+  // if(ratio>1) { //enlarge
+  //   resize(imOrig, imResized, Size(), ratio, ratio,  CV_INTER_CUBIC);
+  // }
+  // else {//shrink
+  //   resize(imOrig, imResized, Size(), ratio, ratio,  CV_INTER_AREA);
+  // }
+  // Just gonna do resize 128 x 128 for now 
+  resize(imOrig, imResized, size);
+
   imwrite("resized"+filename, imResized);
   return 0;
 }

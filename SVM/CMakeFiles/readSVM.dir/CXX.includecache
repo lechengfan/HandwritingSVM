@@ -1,0 +1,20 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/root/HandwritingSVM/SVM/read_SVM.cc
+opencv2/opencv.hpp
+-
+opencv2/core/core.hpp
+-
+iostream
+-
+sstream
+-
+stdlib.h
+-
+

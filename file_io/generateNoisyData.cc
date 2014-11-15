@@ -4,6 +4,8 @@
 #include <sstream> 
 #include <stdlib.h>
 
+#define NUM_FEATURES 128*128
+
 using namespace std;
 using namespace cv;
 
@@ -23,8 +25,10 @@ int main(int argc, char *argv[]) {
         return -1;
     }
 
-	FileStorage fs(argv[3], FileStorage::APPEND); // Filestorage class for writing to files
+	FileStorage fs(argv[3], FileStorage::WRITE); // Filestorage class for writing to files
 	fs << "Filename" << argv[1];
+	fs << "NumExamples" << atoi(argv[2]);
+	fs << "NumFeatures" << NUM_FEATURES;
 	fs << "Data" << "[";
 	int n = strtol(argv[2], NULL, 0);
 	string name = argv[1];
@@ -35,7 +39,8 @@ int main(int argc, char *argv[]) {
 		result = result + noise;
 		normalize(result, result, 0.0, 1.0, CV_MINMAX, CV_64F);
 		result.convertTo(result, CV_8UC3, 255.0);
-		fs << result;
+		Mat vectorized = result.reshape(1, 1);
+		fs << vectorized;
 	}
 	fs << "]";
 	fs.release();
