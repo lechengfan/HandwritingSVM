@@ -41,7 +41,7 @@ int main(int argc, char** argv) {
 		result.convertTo(result, CV_8UC3, 255.0);
 		strm.str("");
 		strm << i;
-		imwrite(strm.str() + name, result);
+		imwrite("./noisy.png", result);
 	}
     return 0;
 }

@@ -35,10 +35,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /root/HandwritingSVM/images
+CMAKE_SOURCE_DIR = /root/HandwritingSVM/noiseadding
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /root/HandwritingSVM/images
+CMAKE_BINARY_DIR = /root/HandwritingSVM/noiseadding
 
 # Include any dependencies generated for this target.
 include CMakeFiles/NoiseAdding.dir/depend.make
@@ -51,17 +51,17 @@ include CMakeFiles/NoiseAdding.dir/flags.make
 
 CMakeFiles/NoiseAdding.dir/noiseadding.cc.o: CMakeFiles/NoiseAdding.dir/flags.make
 CMakeFiles/NoiseAdding.dir/noiseadding.cc.o: noiseadding.cc
-	$(CMAKE_COMMAND) -E cmake_progress_report /root/HandwritingSVM/images/CMakeFiles $(CMAKE_PROGRESS_1)
+	$(CMAKE_COMMAND) -E cmake_progress_report /root/HandwritingSVM/noiseadding/CMakeFiles $(CMAKE_PROGRESS_1)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/NoiseAdding.dir/noiseadding.cc.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/NoiseAdding.dir/noiseadding.cc.o -c /root/HandwritingSVM/images/noiseadding.cc
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/NoiseAdding.dir/noiseadding.cc.o -c /root/HandwritingSVM/noiseadding/noiseadding.cc
 
 CMakeFiles/NoiseAdding.dir/noiseadding.cc.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/NoiseAdding.dir/noiseadding.cc.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /root/HandwritingSVM/images/noiseadding.cc > CMakeFiles/NoiseAdding.dir/noiseadding.cc.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /root/HandwritingSVM/noiseadding/noiseadding.cc > CMakeFiles/NoiseAdding.dir/noiseadding.cc.i
 
 CMakeFiles/NoiseAdding.dir/noiseadding.cc.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/NoiseAdding.dir/noiseadding.cc.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /root/HandwritingSVM/images/noiseadding.cc -o CMakeFiles/NoiseAdding.dir/noiseadding.cc.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /root/HandwritingSVM/noiseadding/noiseadding.cc -o CMakeFiles/NoiseAdding.dir/noiseadding.cc.s
 
 CMakeFiles/NoiseAdding.dir/noiseadding.cc.o.requires:
 .PHONY : CMakeFiles/NoiseAdding.dir/noiseadding.cc.o.requires
@@ -126,6 +126,6 @@ CMakeFiles/NoiseAdding.dir/clean:
 .PHONY : CMakeFiles/NoiseAdding.dir/clean
 
 CMakeFiles/NoiseAdding.dir/depend:
-	cd /root/HandwritingSVM/images && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /root/HandwritingSVM/images /root/HandwritingSVM/images /root/HandwritingSVM/images /root/HandwritingSVM/images /root/HandwritingSVM/images/CMakeFiles/NoiseAdding.dir/DependInfo.cmake --color=$(COLOR)
+	cd /root/HandwritingSVM/noiseadding && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /root/HandwritingSVM/noiseadding /root/HandwritingSVM/noiseadding /root/HandwritingSVM/noiseadding /root/HandwritingSVM/noiseadding /root/HandwritingSVM/noiseadding/CMakeFiles/NoiseAdding.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/NoiseAdding.dir/depend
 

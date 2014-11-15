@@ -4,7 +4,7 @@ SET(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 SET(CMAKE_DEPENDS_CHECK_CXX
-  "/root/HandwritingSVM/images/noiseadding.cc" "/root/HandwritingSVM/images/CMakeFiles/NoiseAdding.dir/noiseadding.cc.o"
+  "/root/HandwritingSVM/noiseadding/noiseadding.cc" "/root/HandwritingSVM/noiseadding/CMakeFiles/NoiseAdding.dir/noiseadding.cc.o"
   )
 SET(CMAKE_CXX_COMPILER_ID "GNU")
 

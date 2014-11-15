@@ -6,7 +6,7 @@
 
 #IncludeRegexTransform: 
 
-/root/HandwritingSVM/images/noiseadding.cc
+/root/HandwritingSVM/noiseadding/noiseadding.cc
 opencv2/opencv.hpp
 -
 opencv2/core/core.hpp

@@ -1,1 +1,1 @@
-/root/HandwritingSVM/images/CMakeFiles/NoiseAdding.dir
+/root/HandwritingSVM/noiseadding/CMakeFiles/NoiseAdding.dir
