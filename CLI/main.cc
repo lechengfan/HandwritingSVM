@@ -11,12 +11,17 @@
 using namespace std;
 using namespace cv;
 
-const string data_dir = "../data/"; // Global directory for xml data
+const string train_data_dir = "../Handwriting_Images/"; // Global directory for xml data
+// const string test_data_dir = "../data/";
+
+const string test_data_dir = "../Handwriting_Images/";
 
 CvSVM svm; // Global svm object
 CvKNearest knn; // Global nearest neighbors object
+CvRTrees rt; // Global random trees object
 bool SVMtrained = false;
 bool KNNtrained = false;
+bool RTtrained = false;
 
 // Get the user's desired action
 size_t getCommand() {
@@ -34,11 +39,11 @@ size_t getCommand() {
 }
 
 // Lists the contents of data_dir
-void printDataDirContents() {
+void printDataDirContents(bool train) {
 	vector<string> v;
 	DIR *dpdf;
 	struct dirent *epdf;	
-	dpdf = opendir(data_dir.c_str());
+	dpdf = opendir(train? train_data_dir.c_str() : test_data_dir.c_str());
 	if (dpdf != NULL) {
 		while(epdf = readdir(dpdf)) {
 			if (strcmp(epdf->d_name, ".") && strcmp(epdf->d_name, ".."))
@@ -63,14 +68,14 @@ void loadMatrix(FileNode& src, Mat& dst, Mat& labels, int value) {
 }
 
 // Get and open FileStorage
-bool getAndOpenFile(FileStorage& f) {
+bool getAndOpenFile(FileStorage& f, bool train) {
 	string fileName;
 	while(true) {
-		printDataDirContents();
+		printDataDirContents(train);
 		cout << ">> ";
 		cin >> fileName;
 		if (fileName == "Q" || fileName == "q" || fileName == "Quit" || fileName == "quit") return false;
-		if (!f.open(data_dir + fileName, FileStorage::READ)) {
+		if (!f.open((train ? train_data_dir : test_data_dir) + fileName, FileStorage::READ)) {
 			cout << "Invalid file name. Try again:" << endl;
 		} else break;
 	}
@@ -82,7 +87,7 @@ bool getAndOpenFile(FileStorage& f) {
 bool loadTrainingFile(Mat& trainingExamples, Mat& yMat, int label) {
 	cout << "Please select a training file (these training examples will be labeled " << label << "): " << endl;
 	FileStorage fs;
-	if (!getAndOpenFile(fs)) return false;
+	if (!getAndOpenFile(fs, true)) return false;
 	FileNode data = fs["Data"];
 	loadMatrix(data, trainingExamples, yMat, label);
 	return true;
@@ -167,7 +172,7 @@ void predictAll() {
 		FileStorage testFs;	
 		Mat testExamples;
 		cout << "Please select a file to test on: " << endl;
-		if (!getAndOpenFile(testFs)) break;
+		if (!getAndOpenFile(testFs, false)) break;
 
 		FileNode data = testFs["Data"];
 		Mat empty;
