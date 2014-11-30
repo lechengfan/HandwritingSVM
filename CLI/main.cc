@@ -14,7 +14,7 @@ using namespace cv;
 const string data_dir = "../data/"; // Global directory for xml data
 
 CvSVM svm; // Global svm
-bool trained = false;
+bool SVMtrained = false;
 
 // Get the user's desired action
 size_t getCommand() {
@@ -22,8 +22,8 @@ size_t getCommand() {
 	do {
 		cout <<
 		"Please choose the number of a command:" << endl <<
-		"1. Train your model" << endl <<
-		"2. Make a prediction" << endl <<
+		"1. SVM: Train your model" << endl <<
+		"2. SVM: Make a prediction" << endl <<
 		"3. Exit" << endl <<
 		" >> " ;
 		cin >> n;
@@ -75,7 +75,7 @@ bool getAndOpenFile(FileStorage& f) {
 	return true;
 }
 
-void train() {
+void trainSVM() {
 	FileStorage posFs;
 	FileStorage negFs;
 
@@ -110,10 +110,10 @@ void train() {
 
 	svm.train(trainingExamples, yMat, Mat(), Mat(), params);
 	cout << "Should be trained now!" << endl;
-	trained = true;
+	SVMtrained = true;
 }
 
-pair<int, int> testAll(Mat& testExamples, Mat& expected) {
+pair<int, int> testAllSVM(Mat& testExamples, Mat& expected) {
 	int total = 0;
 	int wrong = 0;
 	for (int i = 0; i < testExamples.rows; i++) {
@@ -127,9 +127,9 @@ pair<int, int> testAll(Mat& testExamples, Mat& expected) {
 	return pair<int, int>(total, wrong);
 }
 
-void predict() {
+void predictSVM() {
 	string cont;
-	if (!trained) {
+	if (!SVMtrained) {
 		cout << "SVM model not trained yet!" << endl;
 		return;
 	}
@@ -143,7 +143,7 @@ void predict() {
 		Mat empty;
 		loadMatrix(data, testExamples, empty, 1);
 		testExamples.convertTo(testExamples, CV_32F);
-		testAll(testExamples, empty);
+		testAllSVM(testExamples, empty);
 		do {
 			cout << "Predict again? Y/N ";
 			cin >> cont;
@@ -158,10 +158,10 @@ int main() {
 		int n = getCommand();
 		if (n == 1) {
 			// Train
-			train();
+			trainSVM();
 		} else if (n == 2) {
 			// Predict
-			predict();
+			predictSVM();
 		} else {
 			break;
 		}

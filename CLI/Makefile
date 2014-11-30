@@ -99,24 +99,24 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named svm
+# Target rules for targets named HW
 
 # Build rule for target.
-svm: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 svm
-.PHONY : svm
+HW: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 HW
+.PHONY : HW
 
 # fast build rule for target.
-svm/fast:
-	$(MAKE) -f CMakeFiles/svm.dir/build.make CMakeFiles/svm.dir/build
-.PHONY : svm/fast
+HW/fast:
+	$(MAKE) -f CMakeFiles/HW.dir/build.make CMakeFiles/HW.dir/build
+.PHONY : HW/fast
 
 main.o: main.cc.o
 .PHONY : main.o
 
 # target to build an object file
 main.cc.o:
-	$(MAKE) -f CMakeFiles/svm.dir/build.make CMakeFiles/svm.dir/main.cc.o
+	$(MAKE) -f CMakeFiles/HW.dir/build.make CMakeFiles/HW.dir/main.cc.o
 .PHONY : main.cc.o
 
 main.i: main.cc.i
@@ -124,7 +124,7 @@ main.i: main.cc.i
 
 # target to preprocess a source file
 main.cc.i:
-	$(MAKE) -f CMakeFiles/svm.dir/build.make CMakeFiles/svm.dir/main.cc.i
+	$(MAKE) -f CMakeFiles/HW.dir/build.make CMakeFiles/HW.dir/main.cc.i
 .PHONY : main.cc.i
 
 main.s: main.cc.s
@@ -132,7 +132,7 @@ main.s: main.cc.s
 
 # target to generate assembly for a file
 main.cc.s:
-	$(MAKE) -f CMakeFiles/svm.dir/build.make CMakeFiles/svm.dir/main.cc.s
+	$(MAKE) -f CMakeFiles/HW.dir/build.make CMakeFiles/HW.dir/main.cc.s
 .PHONY : main.cc.s
 
 # Help Target
@@ -141,9 +141,9 @@ help:
 	@echo "... all (the default if no target is provided)"
 	@echo "... clean"
 	@echo "... depend"
+	@echo "... HW"
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
-	@echo "... svm"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"

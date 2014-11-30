@@ -53,38 +53,38 @@ CMAKE_SOURCE_DIR = /root/HandwritingSVM/CLI
 CMAKE_BINARY_DIR = /root/HandwritingSVM/CLI
 
 #=============================================================================
-# Target rules for target CMakeFiles/svm.dir
+# Target rules for target CMakeFiles/HW.dir
 
 # All Build rule for target.
-CMakeFiles/svm.dir/all:
-	$(MAKE) -f CMakeFiles/svm.dir/build.make CMakeFiles/svm.dir/depend
-	$(MAKE) -f CMakeFiles/svm.dir/build.make CMakeFiles/svm.dir/build
+CMakeFiles/HW.dir/all:
+	$(MAKE) -f CMakeFiles/HW.dir/build.make CMakeFiles/HW.dir/depend
+	$(MAKE) -f CMakeFiles/HW.dir/build.make CMakeFiles/HW.dir/build
 	$(CMAKE_COMMAND) -E cmake_progress_report /root/HandwritingSVM/CLI/CMakeFiles  1
-	@echo "Built target svm"
-.PHONY : CMakeFiles/svm.dir/all
+	@echo "Built target HW"
+.PHONY : CMakeFiles/HW.dir/all
 
 # Include target in all.
-all: CMakeFiles/svm.dir/all
+all: CMakeFiles/HW.dir/all
 .PHONY : all
 
 # Build rule for subdir invocation for target.
-CMakeFiles/svm.dir/rule: cmake_check_build_system
+CMakeFiles/HW.dir/rule: cmake_check_build_system
 	$(CMAKE_COMMAND) -E cmake_progress_start /root/HandwritingSVM/CLI/CMakeFiles 1
-	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/svm.dir/all
+	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/HW.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /root/HandwritingSVM/CLI/CMakeFiles 0
-.PHONY : CMakeFiles/svm.dir/rule
+.PHONY : CMakeFiles/HW.dir/rule
 
 # Convenience name for target.
-svm: CMakeFiles/svm.dir/rule
-.PHONY : svm
+HW: CMakeFiles/HW.dir/rule
+.PHONY : HW
 
 # clean rule for target.
-CMakeFiles/svm.dir/clean:
-	$(MAKE) -f CMakeFiles/svm.dir/build.make CMakeFiles/svm.dir/clean
-.PHONY : CMakeFiles/svm.dir/clean
+CMakeFiles/HW.dir/clean:
+	$(MAKE) -f CMakeFiles/HW.dir/build.make CMakeFiles/HW.dir/clean
+.PHONY : CMakeFiles/HW.dir/clean
 
 # clean rule for target.
-clean: CMakeFiles/svm.dir/clean
+clean: CMakeFiles/HW.dir/clean
 .PHONY : clean
 
 #=============================================================================

@@ -1,4 +1,0 @@
-Data Set 1: We are using the simplest possible test sample, which are two
-images, "+" and "-". A script will be used to create a data set based on
-these two images by adding some random noise. A labeled set of data will
-be created, and an unlabeled set of data will be created.
