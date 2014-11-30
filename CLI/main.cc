@@ -13,8 +13,10 @@ using namespace cv;
 
 const string data_dir = "../data/"; // Global directory for xml data
 
-CvSVM svm; // Global svm
+CvSVM svm; // Global svm object
+CvKNearest knn; // Global nearest neighbors object
 bool SVMtrained = false;
+bool KNNtrained = false;
 
 // Get the user's desired action
 size_t getCommand() {
@@ -22,8 +24,8 @@ size_t getCommand() {
 	do {
 		cout <<
 		"Please choose the number of a command:" << endl <<
-		"1. SVM: Train your model" << endl <<
-		"2. SVM: Make a prediction" << endl <<
+		"1. Train all models" << endl <<
+		"2. Make a prediction" << endl <<
 		"3. Exit" << endl <<
 		" >> " ;
 		cin >> n;
@@ -75,30 +77,30 @@ bool getAndOpenFile(FileStorage& f) {
 	return true;
 }
 
-void trainSVM() {
-	FileStorage posFs;
-	FileStorage negFs;
+// fs - file to put the data in 
+// label - the number of the label
+bool loadTrainingFile(Mat& trainingExamples, Mat& yMat, int label) {
+	cout << "Please select a training file (these training examples will be labeled " << label << "): " << endl;
+	FileStorage fs;
+	if (!getAndOpenFile(fs)) return false;
+	FileNode data = fs["Data"];
+	loadMatrix(data, trainingExamples, yMat, label);
+	return true;
+}
 
+void trainAll() {
 	Mat trainingExamples;
 	Mat yMat;
-	Mat bufMat;
 
 	int numFeatures, numPos, numNeg;
 
-	cout << "Please select a positive training file: " << endl;
-	// Get positive examples
-	if (!getAndOpenFile(posFs)) return;
+	int i = 0;
+	cout << "Number of labels? " << endl;
+	cin >> i;
 
-	cout << "Please select a negative training file: " << endl;
-	// Get negative examples
-	if (!getAndOpenFile(negFs)) return;
-
-	// Loop over both files to get data into single two mats
-	FileNode posData = posFs["Data"];
-	FileNode negData = negFs["Data"];
-
-	loadMatrix(posData, trainingExamples, yMat, 1);
-	loadMatrix(negData, trainingExamples, yMat, -1);
+	for (int j = 0; j < i; j++) {
+		loadTrainingFile(trainingExamples, yMat, j);
+	}
 
 	// Train the svm
 	trainingExamples.convertTo(trainingExamples, CV_32F);
@@ -109,29 +111,57 @@ void trainSVM() {
 	params.kernel_type = CvSVM::LINEAR;
 
 	svm.train(trainingExamples, yMat, Mat(), Mat(), params);
+	knn.train(trainingExamples, yMat, Mat(), false, 10, false);
 	cout << "Should be trained now!" << endl;
 	SVMtrained = true;
+	KNNtrained = true;
 }
 
 pair<int, int> testAllSVM(Mat& testExamples, Mat& expected) {
 	int total = 0;
 	int wrong = 0;
 	for (int i = 0; i < testExamples.rows; i++) {
-		// if ( svm.predict(testExamples.row(i)) != expected.row(i)) {
-		// 	wrong++;
-		// }
-		// total++;
 		cout << svm.predict(testExamples.row(i)) << endl;
 	}
-	// Eventually makign this a pair to get the error
+	// Eventually making this a pair to get the error
 	return pair<int, int>(total, wrong);
 }
 
-void predictSVM() {
+pair<int, int> testAllKNN(Mat& testExamples, Mat& expected) {
+	int total = 0;
+	int wrong = 0;
+	for (int i = 0; i < testExamples.rows; i++) {
+		cout << knn.find_nearest(testExamples.row(i), 10, 0, 0, 0, 0) << endl;
+	}
+	// Eventually making this a pair to get the error
+	return pair<int, int>(total, wrong);
+}
+
+
+void predictAll() {
 	string cont;
-	if (!SVMtrained) {
-		cout << "SVM model not trained yet!" << endl;
-		return;
+	char opt;
+	cout << "Please select a model to predict with: " << endl
+		 << "1. Support Vector Machine" << endl
+		 << "2. K-Nearest-Neighbors" << endl;
+	cout << " >> ";
+	cin >> opt; 
+	switch(opt) {
+		case('1'):
+			if (!SVMtrained) {
+				cout << "SVM model not yet trained" << endl;
+				return;
+			}
+			break;
+		case('2'):
+			if (!KNNtrained) {
+				cout << "KNN model not yet trained" << endl;	
+				return;
+			}
+			break;
+		default:
+			cout << "Please suck less and put in a valid option" << endl;
+			return;
 	}
 	do {
 		FileStorage testFs;	
@@ -143,7 +173,14 @@ void predictSVM() {
 		Mat empty;
 		loadMatrix(data, testExamples, empty, 1);
 		testExamples.convertTo(testExamples, CV_32F);
-		testAllSVM(testExamples, empty);
+		switch(opt) {
+			case('1'):
+				testAllSVM(testExamples, empty);
+				break;
+			case('2'):
+				testAllKNN(testExamples, empty);
+				break;
+		}
 		do {
 			cout << "Predict again? Y/N ";
 			cin >> cont;
@@ -158,10 +195,10 @@ int main() {
 		int n = getCommand();
 		if (n == 1) {
 			// Train
-			trainSVM();
+			trainAll();
 		} else if (n == 2) {
 			// Predict
-			predictSVM();
+			predictAll();
 		} else {
 			break;
 		}
