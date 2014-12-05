@@ -11,17 +11,15 @@
 using namespace std;
 using namespace cv;
 
-const string train_data_dir = "../Handwriting_Images/"; // Global directory for xml data
+const string train_data_dir = "../Handwriting_Images/Train/"; // Global directory for xml data
 // const string test_data_dir = "../data/";
 
-const string test_data_dir = "../Handwriting_Images/";
+const string test_data_dir = "../Handwriting_Images/Test/";
 
 CvSVM svm; // Global svm object
 CvKNearest knn; // Global nearest neighbors object
 CvRTrees rt; // Global random trees object
-bool SVMtrained = false;
-bool KNNtrained = false;
-bool RTtrained = false;
+bool trained = false;
 
 // Get the user's desired action
 size_t getCommand() {
@@ -111,81 +109,83 @@ void trainAll() {
 	trainingExamples.convertTo(trainingExamples, CV_32F);
 	yMat.convertTo(yMat, CV_32F);
 
-	CvSVMParams params;
-	params.svm_type = CvSVM::C_SVC;
-	params.kernel_type = CvSVM::LINEAR;
+	CvSVMParams svmParams;
+	svmParams.svm_type = CvSVM::C_SVC;
+	svmParams.kernel_type = CvSVM::LINEAR;
 
-	svm.train(trainingExamples, yMat, Mat(), Mat(), params);
+	CvRTParams rtParams;
+
+	svm.train(trainingExamples, yMat, Mat(), Mat(), svmParams);
 	knn.train(trainingExamples, yMat, Mat(), false, 10, false);
+	rt.train(trainingExamples, CV_ROW_SAMPLE, yMat, Mat(), Mat(), Mat(), Mat(), CvRTParams());
 	cout << "Should be trained now!" << endl;
-	SVMtrained = true;
-	KNNtrained = true;
+	trained = true;
 }
 
-pair<int, int> testAllSVM(Mat& testExamples, Mat& expected) {
+pair<int, int> testAll(Mat& testExamples, Mat& expected, char flag) {
 	int total = 0;
 	int wrong = 0;
 	for (int i = 0; i < testExamples.rows; i++) {
-		cout << svm.predict(testExamples.row(i)) << endl;
+		int prediction;
+		switch (flag) {
+			case('1'):
+				prediction = svm.predict(testExamples.row(i));
+				break;
+			case('2'):
+				prediction = knn.find_nearest(testExamples.row(i), 10, 0, 0, 0, 0);
+				break;
+			case('3'):
+				prediction = rt.predict(testExamples.row(i));
+				break;
+			default:
+				return pair<int, int>(-1, -1);
+		}
+		cout << prediction << endl;
+		if (prediction != expected.at<int>(i, 0)) wrong++;
+		total++;
 	}
+	cout << "total: " << total << " wrong: " << wrong << endl;
 	// Eventually making this a pair to get the error
 	return pair<int, int>(total, wrong);
 }
-
-pair<int, int> testAllKNN(Mat& testExamples, Mat& expected) {
-	int total = 0;
-	int wrong = 0;
-	for (int i = 0; i < testExamples.rows; i++) {
-		cout << knn.find_nearest(testExamples.row(i), 10, 0, 0, 0, 0) << endl;
-	}
-	// Eventually making this a pair to get the error
-	return pair<int, int>(total, wrong);
-}
-
 
 void predictAll() {
+	if (!trained) {
+		cout << "Model not trained yet!" << endl;	
+		return;
+	}
 	string cont;
 	char opt;
 	cout << "Please select a model to predict with: " << endl
 		 << "1. Support Vector Machine" << endl
-		 << "2. K-Nearest-Neighbors" << endl;
+		 << "2. K-Nearest-Neighbors" << endl
+		 << "3. Random Trees" << endl;
 	cout << " >> ";
 	cin >> opt; 
-	switch(opt) {
-		case('1'):
-			if (!SVMtrained) {
-				cout << "SVM model not yet trained" << endl;
-				return;
-			}
-			break;
-		case('2'):
-			if (!KNNtrained) {
-				cout << "KNN model not yet trained" << endl;	
-				return;
-			}
-			break;
-		default:
-			cout << "Please suck less and put in a valid option" << endl;
-			return;
-	}
 	do {
 		FileStorage testFs;	
 		Mat testExamples;
 		cout << "Please select a file to test on: " << endl;
 		if (!getAndOpenFile(testFs, false)) break;
 
+		cout << "What is the expected label? "; 
+		int y;
+		cin >> y;
+
 		FileNode data = testFs["Data"];
-		Mat empty;
-		loadMatrix(data, testExamples, empty, 1);
+		Mat labels;
+		loadMatrix(data, testExamples, labels, y);
 		testExamples.convertTo(testExamples, CV_32F);
-		switch(opt) {
-			case('1'):
-				testAllSVM(testExamples, empty);
-				break;
-			case('2'):
-				testAllKNN(testExamples, empty);
-				break;
+
+		// Test everything!
+		pair<int, int> results;
+		results = testAll(testExamples, labels, opt);
+
+		if (results.first == -1) {
+			cout << "Invalid option." << endl;
+			return;
 		}
+		cout << "Error: " << ((float)results.second)/results.first * 100 << "%" << endl;
 		do {
 			cout << "Predict again? Y/N ";
 			cin >> cont;
