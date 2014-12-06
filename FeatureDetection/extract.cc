@@ -27,12 +27,12 @@ int getInt(int min, int max) {
 	} while (result < min || result > max);
 }
 
-void getImage(Mat& output) {
+void getImage(Mat& output, string& filename) {
 	do {
 		cout << "Please enter an image path: ";
-		string filename;
 		getline(cin, filename);
-		output = imread(filename, CV_LOAD_IMAGE_GRAYSCALE);
+		output = imread(filename, CV_LOAD_IMAGE_COLOR);
+		greyOutput = imread(filename, CV_LOAD_IMAGE_GRAYSCALE);
 	} while (!output.data && cout << "Invalid image. ");
 }
 
@@ -44,10 +44,20 @@ void getCorners(Mat& input, Mat& output) {
 int main() {
 	int opt;
 	Mat img;
+	Mat greyImg;
 	Mat output;
+	string filename;
 	// printPrompt();	
 	while (true) {
-		getImage(img); 
+		getImage(img, greyImg,  filename); 
 		getCorners(img, output);
 	}
 }
+
+
+
+
+
+
+
+
