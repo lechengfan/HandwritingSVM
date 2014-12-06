@@ -140,7 +140,7 @@ pair<int, int> testAll(Mat& testExamples, Mat& expected, char flag) {
 	for (int i = 0; i < testExamples.rows; i++) {
 		int prediction;
 		switch (flag) {
-			case('1'):
+			case('1'): 
 				prediction = svm.predict(testExamples.row(i));
 				break;
 			case('2'):
@@ -149,8 +149,8 @@ pair<int, int> testAll(Mat& testExamples, Mat& expected, char flag) {
 			case('3'):
 				prediction = rt.predict(testExamples.row(i));
 				break;
-			case('4'):
-			  // source: http://www.nithinrajs.in/ocr-artificial-neural-network-opencv-part-3final-preprocessing/
+			case('4'): {
+				// source: http://www.nithinrajs.in/ocr-artificial-neural-network-opencv-part-3final-preprocessing/
 				int numClasses = 3;
 				Mat classificationResult(1, numClasses, CV_32F);
 				mlp.predict(testExamples.row(i), classificationResult);
@@ -168,6 +168,7 @@ pair<int, int> testAll(Mat& testExamples, Mat& expected, char flag) {
 					}
 				}
 				prediction = maxIndex;
+			}
 				break;
 			default:
 				return pair<int, int>(-1, -1);
