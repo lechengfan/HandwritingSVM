@@ -37,7 +37,7 @@ void getImage(Mat& output) {
 }
 
 void getCorners(Mat& input, Mat& output) {
-	goodFeaturesToTrack(input, output, kMaxCorners, 0.01, 1);
+	goodFeaturesToTrack(input, output, kMaxCorners, 0.02, 1);
 	cout << output << endl;
 }
 

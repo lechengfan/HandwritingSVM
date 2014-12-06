@@ -38,7 +38,8 @@ int main(int argc, char** argv) {
 
 	float translate[2][3] = {{1, 0, 64-x_center}, {0,1,64-y_center}};
 	Mat translateMat = Mat(2,3, CV_32FC1, &translate);
-	warpAffine(imGray, result, translateMat, Size(128,128));
+	warpAffine(inverted, result, translateMat, Size(128,128));
+	result = cv::Scalar::all(255) - result;
 	normalize(result, result, 0.0, 1.0, CV_MINMAX, CV_64F);
 	//namedWindow( "Display window", WINDOW_AUTOSIZE );// Create a window for display.
 	//imshow("OUTPUT",result);
