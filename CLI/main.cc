@@ -155,7 +155,7 @@ void trainAll() {
 	svm.train(trainingExamples, yMat, Mat(), Mat(), svmParams);
 	knn.train(trainingExamples, yMat, Mat(), false, 10, false);
 	rt.train(trainingExamples, CV_ROW_SAMPLE, yMat, Mat(), Mat(), Mat(), Mat(), CvRTParams());
-	mlp.train(trainingExamples, yMat, Mat(), Mat(), mlpParams);
+	mlp.train(trainingExamples, mlpLabels, Mat(), Mat(), mlpParams);
 
 	cout << "Should be trained now!" << endl;
 	trained = true;
