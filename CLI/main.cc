@@ -150,6 +150,7 @@ pair<int, int> testAll(Mat& testExamples, Mat& expected, char flag) {
 				prediction = rt.predict(testExamples.row(i));
 				break;
 			case('4'):
+			  // source: http://www.nithinrajs.in/ocr-artificial-neural-network-opencv-part-3final-preprocessing/
 				int numClasses = 3;
 				Mat classificationResult(1, numClasses, CV_32F);
 				mlp.predict(testExamples.row(i), classificationResult);
@@ -160,10 +161,10 @@ pair<int, int> testAll(Mat& testExamples, Mat& expected, char flag) {
 				float value = 0.0f;
 				float maxValue = classificationResult.at<float>(0,0);
 				for (int m = 1; m < numClasses; m++) {
-					value = classificationResult.at<float>(0, index);
+					value = classificationResult.at<float>(0, m);
 					if (value > maxValue) {
 						maxValue = value;
-						maxIndex = index;
+						maxIndex = m;
 					}
 				}
 				prediction = maxIndex;
