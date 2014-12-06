@@ -168,6 +168,7 @@ pair<int, int> testAll(Mat& testExamples, Mat& expected, char flag) {
 					}
 				}
 				prediction = maxIndex;
+				break;
 			default:
 				return pair<int, int>(-1, -1);
 		}
