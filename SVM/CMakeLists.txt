@@ -1,5 +1,0 @@
-cmake_minimum_required(VERSION 2.8)
-project( readSVM )
-find_package( OpenCV REQUIRED )
-add_executable( readSVM read_SVM.cc )
-target_link_libraries( readSVM ${OpenCV_LIBS} )

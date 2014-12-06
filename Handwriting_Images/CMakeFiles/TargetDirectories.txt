@@ -1,1 +1,0 @@
-/root/HandwritingSVM/Handwriting_Images/CMakeFiles/aggregateData.dir

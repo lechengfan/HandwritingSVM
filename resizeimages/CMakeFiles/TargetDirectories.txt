@@ -1,1 +1,0 @@
-/root/HandwritingSVM/resizeimages/CMakeFiles/resizeImage.dir
