@@ -115,7 +115,18 @@ void trainAll() {
 	svmParams.svm_type = CvSVM::C_SVC;
 	svmParams.kernel_type = CvSVM::LINEAR;
 
-	// Trianing parameters for MLP
+	// Training parameters for MLP
+	// The neural net has three layers.
+	// - one input node per attribute in a sample so 128x128 input nodes
+	// - 16 hidden nodes
+	// - one node per output
+	// TODO: Put code for each algorithm in its own executable?
+	Mat layers(3, 1, CV_32S);
+	layers.at<int>(0, 0) = 128 * 128; // input layer
+	layers.at<int>(1, 0) = 16; // hidden layer
+	layers.at<int>(2, 0) = 3; // output layer
+	mlp.create(layers, CvANN_MLP::SIGMOID_SYM, 0.6, 1);
+
 	CvANN_MLP_TrainParams mlpParams( 	cvTermCriteria(CV_TERMCRIT_ITER+CV_TERMCRIT_EPS, 1000, 0.000001),
 																		CvANN_MLP_TrainParams::BACKPROP,
 																		0.1,
