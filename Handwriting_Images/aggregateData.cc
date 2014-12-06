@@ -25,7 +25,7 @@ int main(int argc, char *argv[]) {
 	dpdf = opendir(argv[1]);
 	if (dpdf != NULL) {
 		int nExamples=0;
-		while(epdf = readdir(dpdf)) {
+	while(epdf = readdir(dpdf)) {
 			if (strcmp(epdf->d_name, ".") && strcmp(epdf->d_name, "..") && strcmp(epdf->d_name, ".xml")) {
 				string imageFileName = (string(epdf->d_name));
 				cout << imageFileName << endl;
