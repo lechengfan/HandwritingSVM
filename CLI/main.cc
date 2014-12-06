@@ -19,7 +19,7 @@ const string test_data_dir = "../Handwriting_Images/Test/";
 CvSVM svm; // Global svm object
 CvKNearest knn; // Global nearest neighbors object
 CvRTrees rt; // Global random trees object
-CvANN mlp; // Global multi-layer perceptron
+CvANN_MLP mlp; // Global multi-layer perceptron
 bool trained = false;
 
 // Get the user's desired action
@@ -116,7 +116,7 @@ void trainAll() {
 	svmParams.kernel_type = CvSVM::LINEAR;
 
 	// Trianing parameters for MLP
-	CvANN_MLP_TrainParams mlpParams( 	cvTermCriteria(CV_TERMCREI_ITER+CV_TERMCRIT_EPS, 1000, 0.000001),
+	CvANN_MLP_TrainParams mlpParams( 	cvTermCriteria(CV_TERMCRIT_ITER+CV_TERMCRIT_EPS, 1000, 0.000001),
 																		CvANN_MLP_TrainParams::BACKPROP,
 																		0.1,
 																		0.1);
