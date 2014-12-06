@@ -19,6 +19,7 @@ const string test_data_dir = "../Handwriting_Images/Test/";
 CvSVM svm; // Global svm object
 CvKNearest knn; // Global nearest neighbors object
 CvRTrees rt; // Global random trees object
+CvANN mlp; // Global multi-layer perceptron
 bool trained = false;
 
 // Get the user's desired action
@@ -114,11 +115,18 @@ void trainAll() {
 	svmParams.svm_type = CvSVM::C_SVC;
 	svmParams.kernel_type = CvSVM::LINEAR;
 
+	// Trianing parameters for MLP
+	CvANN_MLP_TrainParams mlpParams( 	cvTermCriteria(CV_TERMCREI_ITER+CV_TERMCRIT_EPS, 1000, 0.000001),
+																		CvANN_MLP_TrainParams::BACKPROP,
+																		0.1,
+																		0.1);
+
 	CvRTParams rtParams;
 
 	svm.train(trainingExamples, yMat, Mat(), Mat(), svmParams);
 	knn.train(trainingExamples, yMat, Mat(), false, 10, false);
 	rt.train(trainingExamples, CV_ROW_SAMPLE, yMat, Mat(), Mat(), Mat(), Mat(), CvRTParams());
+	mlp.train(trainingExamples, yMat, Mat(), Mat(), mlpParams);
 
 	cout << "Should be trained now!" << endl;
 	trained = true;
@@ -141,6 +149,24 @@ pair<int, int> testAll(Mat& testExamples, Mat& expected, char flag) {
 			case('3'):
 				prediction = rt.predict(testExamples.row(i));
 				break;
+			case('4'):
+				int numClasses = 3;
+				Mat classificationResult(1, numClasses, CV_32F);
+				mlp.predict(testExamples.row(i), classificationResult);
+				
+				// find the class with the maximum weightage, which indicates
+				// the predicted class
+				int maxIndex = 0;
+				float value = 0.0f;
+				float maxValue = classificationResult.at<float>(0,0);
+				for (int m = 1; m < numClasses; m++) {
+					value = classificationResult.at<float>(0, index);
+					if (value > maxValue) {
+						maxValue = value;
+						maxIndex = index;
+					}
+				}
+				prediction = maxIndex;
 			default:
 				return pair<int, int>(-1, -1);
 		}
@@ -163,7 +189,8 @@ void predictAll() {
 	cout << "Please select a model to predict with: " << endl
 		 << "1. Support Vector Machine" << endl
 		 << "2. K-Nearest-Neighbors" << endl
-		 << "3. Random Trees" << endl;
+		 << "3. Random Trees" << endl
+		 << "4. MLP Neural Nets" << endl;
 	cout << " >> ";
 	cin >> opt; 
 	do {
