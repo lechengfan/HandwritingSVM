@@ -144,7 +144,8 @@ void trainAll() {
 	cout << numSamples << endl;
 	Mat mlpLabels(numSamples, i, DataType<float>::type);
 	for(size_t m = 0; m < numSamples; m++) {
-		float yVal = yMat.at(m);
+		Point pt(m, 1);
+		float yVal = yMat.at(pt);
 		mlpLabels.at(m, yVal) = 1;
 	}
   /**************** MLP END **********************/
