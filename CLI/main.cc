@@ -115,6 +115,7 @@ void trainAll() {
 	svmParams.svm_type = CvSVM::C_SVC;
 	svmParams.kernel_type = CvSVM::LINEAR;
 
+	/**************** MLP START **********************/
 	// Training parameters for MLP
 	// The neural net has three layers.
 	// - one input node per attribute in a sample so 128x128 input nodes
@@ -124,15 +125,32 @@ void trainAll() {
 	Mat layers(3, 1, CV_32S);
 	layers.at<int>(0, 0) = 128 * 128; // input layer
 	layers.at<int>(1, 0) = 16; // hidden layer
-	layers.at<int>(2, 0) = 3; // output layer
+	layers.at<int>(2, 0) = 60; // output layer
 	mlp.create(layers, CvANN_MLP::SIGMOID_SYM, 0.6, 1);
-
 	CvANN_MLP_TrainParams mlpParams( 	cvTermCriteria(CV_TERMCRIT_ITER+CV_TERMCRIT_EPS, 1000, 0.000001),
 																		CvANN_MLP_TrainParams::BACKPROP,
 																		0.1,
 																		0.1);
+	// MLP require output data in a different format.
+	// For example, if we had a yMat of [1; 2; 0], the corresponding
+	// mlpLabels would be:
+	/*
+	    0 1 2
+		[ 0 1 0;
+		  0 0 1;
+		  1 0 0 ]
+	*/
+	int numSamples = yMat.size().height;
+	cout << numSamples << endl;
+	Mat mlpLabels(numSamples, i, DataType<float>::type);
+	for(size_t m = 0; m < numSamples; m++) {
+		float yVal = yMat.at(m);
+		mlpLabels.at(m, yVal) = 1;
+	}
+  /**************** MLP END **********************/
 
 	CvRTParams rtParams;
+
 
 	svm.train(trainingExamples, yMat, Mat(), Mat(), svmParams);
 	knn.train(trainingExamples, yMat, Mat(), false, 10, false);
