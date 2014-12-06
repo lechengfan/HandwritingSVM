@@ -1,0 +1,5 @@
+cmake_minimum_required(VERSION 2.8)
+project( aggregateData )
+find_package( OpenCV REQUIRED)
+add_executable( aggregateData aggregateData.cc)
+target_link_libraries( aggregateData ${OpenCV_LIBS} )
