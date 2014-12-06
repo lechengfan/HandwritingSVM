@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 2.8)
-project( generateNoise )
+project( centroid )
 find_package( OpenCV REQUIRED )
-add_executable( generateNoise generateNoisyData.cc )
-target_link_libraries( generateNoise ${OpenCV_LIBS} )
+add_executable( centroid centroid.cc )
+target_link_libraries( centroid ${OpenCV_LIBS} )

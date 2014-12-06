@@ -47,44 +47,44 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /root/HandwritingSVM/file_io
+CMAKE_SOURCE_DIR = /root/HandwritingSVM/FeatureDetection
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /root/HandwritingSVM/file_io
+CMAKE_BINARY_DIR = /root/HandwritingSVM/FeatureDetection
 
 #=============================================================================
-# Target rules for target CMakeFiles/centroid.dir
+# Target rules for target CMakeFiles/extract.dir
 
 # All Build rule for target.
-CMakeFiles/centroid.dir/all:
-	$(MAKE) -f CMakeFiles/centroid.dir/build.make CMakeFiles/centroid.dir/depend
-	$(MAKE) -f CMakeFiles/centroid.dir/build.make CMakeFiles/centroid.dir/build
-	$(CMAKE_COMMAND) -E cmake_progress_report /root/HandwritingSVM/file_io/CMakeFiles  1
-	@echo "Built target centroid"
-.PHONY : CMakeFiles/centroid.dir/all
+CMakeFiles/extract.dir/all:
+	$(MAKE) -f CMakeFiles/extract.dir/build.make CMakeFiles/extract.dir/depend
+	$(MAKE) -f CMakeFiles/extract.dir/build.make CMakeFiles/extract.dir/build
+	$(CMAKE_COMMAND) -E cmake_progress_report /root/HandwritingSVM/FeatureDetection/CMakeFiles  1
+	@echo "Built target extract"
+.PHONY : CMakeFiles/extract.dir/all
 
 # Include target in all.
-all: CMakeFiles/centroid.dir/all
+all: CMakeFiles/extract.dir/all
 .PHONY : all
 
 # Build rule for subdir invocation for target.
-CMakeFiles/centroid.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /root/HandwritingSVM/file_io/CMakeFiles 1
-	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/centroid.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /root/HandwritingSVM/file_io/CMakeFiles 0
-.PHONY : CMakeFiles/centroid.dir/rule
+CMakeFiles/extract.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /root/HandwritingSVM/FeatureDetection/CMakeFiles 1
+	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/extract.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /root/HandwritingSVM/FeatureDetection/CMakeFiles 0
+.PHONY : CMakeFiles/extract.dir/rule
 
 # Convenience name for target.
-centroid: CMakeFiles/centroid.dir/rule
-.PHONY : centroid
+extract: CMakeFiles/extract.dir/rule
+.PHONY : extract
 
 # clean rule for target.
-CMakeFiles/centroid.dir/clean:
-	$(MAKE) -f CMakeFiles/centroid.dir/build.make CMakeFiles/centroid.dir/clean
-.PHONY : CMakeFiles/centroid.dir/clean
+CMakeFiles/extract.dir/clean:
+	$(MAKE) -f CMakeFiles/extract.dir/build.make CMakeFiles/extract.dir/clean
+.PHONY : CMakeFiles/extract.dir/clean
 
 # clean rule for target.
-clean: CMakeFiles/centroid.dir/clean
+clean: CMakeFiles/extract.dir/clean
 .PHONY : clean
 
 #=============================================================================

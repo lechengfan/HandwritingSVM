@@ -39,10 +39,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /root/HandwritingSVM/file_io
+CMAKE_SOURCE_DIR = /root/HandwritingSVM/FeatureDetection
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /root/HandwritingSVM/file_io
+CMAKE_BINARY_DIR = /root/HandwritingSVM/FeatureDetection
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -69,9 +69,9 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /root/HandwritingSVM/file_io/CMakeFiles /root/HandwritingSVM/file_io/CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /root/HandwritingSVM/FeatureDetection/CMakeFiles /root/HandwritingSVM/FeatureDetection/CMakeFiles/progress.marks
 	$(MAKE) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /root/HandwritingSVM/file_io/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /root/HandwritingSVM/FeatureDetection/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -99,41 +99,41 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named centroid
+# Target rules for targets named extract
 
 # Build rule for target.
-centroid: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 centroid
-.PHONY : centroid
+extract: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 extract
+.PHONY : extract
 
 # fast build rule for target.
-centroid/fast:
-	$(MAKE) -f CMakeFiles/centroid.dir/build.make CMakeFiles/centroid.dir/build
-.PHONY : centroid/fast
+extract/fast:
+	$(MAKE) -f CMakeFiles/extract.dir/build.make CMakeFiles/extract.dir/build
+.PHONY : extract/fast
 
-centroid.o: centroid.cc.o
-.PHONY : centroid.o
+extract.o: extract.cc.o
+.PHONY : extract.o
 
 # target to build an object file
-centroid.cc.o:
-	$(MAKE) -f CMakeFiles/centroid.dir/build.make CMakeFiles/centroid.dir/centroid.cc.o
-.PHONY : centroid.cc.o
+extract.cc.o:
+	$(MAKE) -f CMakeFiles/extract.dir/build.make CMakeFiles/extract.dir/extract.cc.o
+.PHONY : extract.cc.o
 
-centroid.i: centroid.cc.i
-.PHONY : centroid.i
+extract.i: extract.cc.i
+.PHONY : extract.i
 
 # target to preprocess a source file
-centroid.cc.i:
-	$(MAKE) -f CMakeFiles/centroid.dir/build.make CMakeFiles/centroid.dir/centroid.cc.i
-.PHONY : centroid.cc.i
+extract.cc.i:
+	$(MAKE) -f CMakeFiles/extract.dir/build.make CMakeFiles/extract.dir/extract.cc.i
+.PHONY : extract.cc.i
 
-centroid.s: centroid.cc.s
-.PHONY : centroid.s
+extract.s: extract.cc.s
+.PHONY : extract.s
 
 # target to generate assembly for a file
-centroid.cc.s:
-	$(MAKE) -f CMakeFiles/centroid.dir/build.make CMakeFiles/centroid.dir/centroid.cc.s
-.PHONY : centroid.cc.s
+extract.cc.s:
+	$(MAKE) -f CMakeFiles/extract.dir/build.make CMakeFiles/extract.dir/extract.cc.s
+.PHONY : extract.cc.s
 
 # Help Target
 help:
@@ -141,12 +141,12 @@ help:
 	@echo "... all (the default if no target is provided)"
 	@echo "... clean"
 	@echo "... depend"
-	@echo "... centroid"
 	@echo "... edit_cache"
+	@echo "... extract"
 	@echo "... rebuild_cache"
-	@echo "... centroid.o"
-	@echo "... centroid.i"
-	@echo "... centroid.s"
+	@echo "... extract.o"
+	@echo "... extract.i"
+	@echo "... extract.s"
 .PHONY : help
 
 

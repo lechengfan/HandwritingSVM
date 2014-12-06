@@ -1,1 +1,1 @@
-/root/HandwritingSVM/file_io/CMakeFiles/generateNoise.dir
+/root/HandwritingSVM/file_io/CMakeFiles/centroid.dir
