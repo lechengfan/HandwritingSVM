@@ -62,6 +62,6 @@ int main(int argc, char ** argv) {
   // Just gonna do resize 128 x 128 for now 
   // resize(imOrig, imResized, size);
 
-  imwrite("resized"+filename, imResized);
+  imwrite("resized"+filename, croppedMat);
   return 0;
 }
