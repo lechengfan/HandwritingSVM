@@ -4,7 +4,7 @@ SET(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 SET(CMAKE_DEPENDS_CHECK_CXX
-  "/root/HandwritingSVM/CLI/main.cc" "/root/HandwritingSVM/CLI/CMakeFiles/HW.dir/main.cc.o"
+  "/root/Max/HandwritingSVM/CLI/main.cc" "/root/Max/HandwritingSVM/CLI/CMakeFiles/HW.dir/main.cc.o"
   )
 SET(CMAKE_CXX_COMPILER_ID "GNU")
 

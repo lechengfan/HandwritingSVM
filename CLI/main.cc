@@ -21,6 +21,7 @@ const string test_data_dir = "../Handwriting_Images/Test/";
 CvSVM svm; // Global svm object
 CvKNearest knn; // Global nearest neighbors object
 CvRTrees rt; // Global random trees object
+CvANN_MLP mlp; // Global multi-layer perceptron
 bool trained = false;
 
 // Get the user's desired action
@@ -124,11 +125,56 @@ void trainAll() {
 	svmParams.svm_type = CvSVM::C_SVC;
 	svmParams.kernel_type = CvSVM::LINEAR;
 
+	/**************** MLP START **********************/
+	// Training parameters for MLP
+	// The neural net has three layers.
+	// - one input node per attribute in a sample so 128x128 input nodes
+	// - 16 hidden nodes
+	// - one node per output
+	// TODO: Put code for each algorithm in its own executable?
+	Mat layers(3, 1, CV_32S);
+	layers.at<int>(0, 0) = 128 * 128; // input layer
+	layers.at<int>(1, 0) = 2; // hidden layer
+	layers.at<int>(2, 0) = i; // output layer
+	mlp.create(layers, CvANN_MLP::SIGMOID_SYM, 0.6, 1);
+	CvANN_MLP_TrainParams mlpParams( 	cvTermCriteria(CV_TERMCRIT_ITER+CV_TERMCRIT_EPS, 1000, 0.000001),
+																		CvANN_MLP_TrainParams::BACKPROP,
+																		0.1,
+																		0.1);
+	// MLP require output data in a different format.
+	// For example, if we had a yMat of [1; 2; 0], the corresponding
+	// mlpLabels would be:
+	/*
+	    0 1 2
+		[ 0 1 0;
+		  0 0 1;
+		  1 0 0 ]
+	*/
+	int numSamples = yMat.size().height;
+	Mat mlpLabels(numSamples, i, DataType<float>::type);
+	// TODO: Clean up couts
+	cout << "***************" << endl;
+	cout << numSamples << endl;
+	for(int m = 0; m < numSamples; m++) {
+		int yVal = yMat.at<float>(m, 0);
+		for(int n = 0; n < i; n++) {
+			if(yVal == n) {
+				mlpLabels.at<float>(m, n) = 0.0;
+			} else {
+				mlpLabels.at<float>(m, n) = 1.0;
+			}
+		}
+	}
+	cout << mlpLabels << endl;
+  /**************** MLP END **********************/
+
 	CvRTParams rtParams;
+
 
 	svm.train(trainingExamples, yMat, Mat(), Mat(), svmParams);
 	knn.train(trainingExamples, yMat, Mat(), false, 10, false);
 	rt.train(trainingExamples, CV_ROW_SAMPLE, yMat, Mat(), Mat(), Mat(), Mat(), CvRTParams());
+	mlp.train(trainingExamples, mlpLabels, Mat(), Mat(), mlpParams);
 
 	cout << "Should be trained now!" << endl;
 	trained = true;
@@ -142,7 +188,7 @@ pair<int, int> testAll(Mat& testExamples, Mat& expected, char flag) {
 	for (int i = 0; i < testExamples.rows; i++) {
 		int prediction;
 		switch (flag) {
-			case('1'):
+			case('1'): 
 				prediction = svm.predict(testExamples.row(i));
 				break;
 			case('2'):
@@ -150,6 +196,28 @@ pair<int, int> testAll(Mat& testExamples, Mat& expected, char flag) {
 				break;
 			case('3'):
 				prediction = rt.predict(testExamples.row(i));
+				break;
+			case('4'): {
+				// source: http://www.nithinrajs.in/ocr-artificial-neural-network-opencv-part-3final-preprocessing/
+				int numClasses = 3;
+				Mat classificationResult(1, numClasses, CV_32F);
+				mlp.predict(testExamples.row(i), classificationResult);
+				cout << classificationResult << endl;
+				
+				// find the class with the maximum weightage, which indicates
+				// the predicted class
+				int maxIndex = 0;
+				float value = 0.0f;
+				float maxValue = classificationResult.at<float>(0,0);
+				for (int m = 0; m < numClasses; m++) {
+					value = classificationResult.at<float>(0, m);
+					if (value > maxValue) {
+						maxValue = value;
+						maxIndex = m;
+					}
+				}
+				prediction = maxIndex;
+			}
 				break;
 			default:
 				return pair<int, int>(-1, -1);
@@ -173,7 +241,8 @@ void predictAll() {
 	cout << "Please select a model to predict with: " << endl
 		 << "1. Support Vector Machine" << endl
 		 << "2. K-Nearest-Neighbors" << endl
-		 << "3. Random Trees" << endl;
+		 << "3. Random Trees" << endl
+		 << "4. MLP Neural Nets" << endl;
 	cout << " >> ";
 	cin >> opt; 
 	do {
