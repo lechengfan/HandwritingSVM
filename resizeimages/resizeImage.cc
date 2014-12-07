@@ -16,7 +16,7 @@ int main(int argc, char ** argv) {
     exit(-1);
   }
   
-  Mat imOrig, imResized;
+  Mat imOrig, imResized, inverted;
   String filename = argv[1];
   imOrig = imread(argv[1], CV_LOAD_IMAGE_GRAYSCALE); //Read file grayscale
   if(!imOrig.data) {
@@ -42,9 +42,10 @@ int main(int argc, char ** argv) {
 
   int width = maxX-minX;
   int height = maxY-minY;
+  inverted = Scalar::all(255)-imOrig;
   float translate[2][3] = {{1, 0, 64-(maxX+minX)/2}, {0,1,64-(maxY+minY)/2}};
   Mat translateMat = Mat(2,3, CV_32FC1, &translate);
-  warpAffine(imOrig, imResized, translateMat, Size(128,128));
+  warpAffine(inverted, imResized, translateMat, Size(128,128));
 
   // int max = std::max(width, height);
   // double ratio = 128.0/max;
