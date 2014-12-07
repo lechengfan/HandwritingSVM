@@ -42,7 +42,9 @@ int main(int argc, char ** argv) {
 
   int resize_width = maxX-minX;
   int resize_height = maxY-minY;
-  Rect cropped(minX, minY, resize_width, resize_height);
+  cout << minX << "  " << resize_width << endl;
+  cout << minY << "  " << resize_height << endl;
+  Rect cropped(minY, minX, resize_height, resize_width);
   Mat croppedMat = imOrig(cropped);
 
   // inverted = Scalar::all(255)-imOrig;
