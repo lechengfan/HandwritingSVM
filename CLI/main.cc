@@ -122,7 +122,7 @@ void trainAll() {
 	// - 16 hidden nodes
 	// - one node per output
 	// TODO: Put code for each algorithm in its own executable?
-	Mat layers(2, 1, CV_32S);
+	Mat layers(3, 1, CV_32S);
 	layers.at<int>(0, 0) = 128 * 128; // input layer
 	layers.at<int>(1, 0) = 2; // hidden layer
 	layers.at<int>(2, 0) = i; // output layer

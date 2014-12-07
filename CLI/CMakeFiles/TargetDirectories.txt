@@ -1,1 +1,1 @@
-/root/HandwritingSVM/CLI/CMakeFiles/HW.dir
+/root/Max/HandwritingSVM/CLI/CMakeFiles/HW.dir

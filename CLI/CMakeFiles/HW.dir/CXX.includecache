@@ -6,7 +6,7 @@
 
 #IncludeRegexTransform: 
 
-/root/HandwritingSVM/CLI/main.cc
+/root/Max/HandwritingSVM/CLI/main.cc
 opencv2/opencv.hpp
 -
 opencv2/core/core.hpp

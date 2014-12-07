@@ -35,10 +35,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /root/HandwritingSVM/CLI
+CMAKE_SOURCE_DIR = /root/Max/HandwritingSVM/CLI
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /root/HandwritingSVM/CLI
+CMAKE_BINARY_DIR = /root/Max/HandwritingSVM/CLI
 
 # Include any dependencies generated for this target.
 include CMakeFiles/HW.dir/depend.make
@@ -51,17 +51,17 @@ include CMakeFiles/HW.dir/flags.make
 
 CMakeFiles/HW.dir/main.cc.o: CMakeFiles/HW.dir/flags.make
 CMakeFiles/HW.dir/main.cc.o: main.cc
-	$(CMAKE_COMMAND) -E cmake_progress_report /root/HandwritingSVM/CLI/CMakeFiles $(CMAKE_PROGRESS_1)
+	$(CMAKE_COMMAND) -E cmake_progress_report /root/Max/HandwritingSVM/CLI/CMakeFiles $(CMAKE_PROGRESS_1)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/HW.dir/main.cc.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/HW.dir/main.cc.o -c /root/HandwritingSVM/CLI/main.cc
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/HW.dir/main.cc.o -c /root/Max/HandwritingSVM/CLI/main.cc
 
 CMakeFiles/HW.dir/main.cc.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/HW.dir/main.cc.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /root/HandwritingSVM/CLI/main.cc > CMakeFiles/HW.dir/main.cc.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /root/Max/HandwritingSVM/CLI/main.cc > CMakeFiles/HW.dir/main.cc.i
 
 CMakeFiles/HW.dir/main.cc.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/HW.dir/main.cc.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /root/HandwritingSVM/CLI/main.cc -o CMakeFiles/HW.dir/main.cc.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /root/Max/HandwritingSVM/CLI/main.cc -o CMakeFiles/HW.dir/main.cc.s
 
 CMakeFiles/HW.dir/main.cc.o.requires:
 .PHONY : CMakeFiles/HW.dir/main.cc.o.requires
@@ -126,6 +126,6 @@ CMakeFiles/HW.dir/clean:
 .PHONY : CMakeFiles/HW.dir/clean
 
 CMakeFiles/HW.dir/depend:
-	cd /root/HandwritingSVM/CLI && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /root/HandwritingSVM/CLI /root/HandwritingSVM/CLI /root/HandwritingSVM/CLI /root/HandwritingSVM/CLI /root/HandwritingSVM/CLI/CMakeFiles/HW.dir/DependInfo.cmake --color=$(COLOR)
+	cd /root/Max/HandwritingSVM/CLI && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /root/Max/HandwritingSVM/CLI /root/Max/HandwritingSVM/CLI /root/Max/HandwritingSVM/CLI /root/Max/HandwritingSVM/CLI /root/Max/HandwritingSVM/CLI/CMakeFiles/HW.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/HW.dir/depend
 
