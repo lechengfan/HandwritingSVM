@@ -7,7 +7,7 @@
 #include "dirent.h"
 
 const int NUM_FEATURES = 128*128;
-const int numCorners = 5;
+const int numCorners = 7;
 const double qualityLevel = 0.00000000000001;
 
 using namespace std;
@@ -61,7 +61,7 @@ int main(int argc, char *argv[]) {
 		return -1;
 	}
 	string outputFile=argv[1];
-	FileStorage fs(outputFile + "_corner5_center" +".xml", FileStorage::WRITE);
+	FileStorage fs(outputFile + "_corner7_center" +".xml", FileStorage::WRITE);
 	fs << "NumFeatures" << NUM_FEATURES;
 	fs << "Data" << "[";
 	DIR *dpdf;
