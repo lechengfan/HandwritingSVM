@@ -38,23 +38,12 @@ int main(int argc, char ** argv) {
       }
     }
   }  
-  
-
   int resize_width = maxX-minX;
   int resize_height = maxY-minY;
-  // cout << minX << "  " << resize_width << endl;
-  // cout << minY << "  " << resize_height << endl;
   Rect cropped(minY, minX, resize_height, resize_width);
   Mat croppedMat = imOrig(cropped);
 
   resize(croppedMat, imResized, Size(128,128), (float) originalSize.width/resize_width, (float) originalSize.height/resize_height,  CV_INTER_CUBIC);
-  // }
-  // else {//shrink
-  //   resize(imOrig, imResized, Size(), ratio, ratio,  CV_INTER_AREA);
-  // }
-  // Just gonna do resize 128 x 128 for now 
-  // resize(imOrig, imResized, size);
-
   imwrite("resized"+filename, imResized);
   return 0;
 }
