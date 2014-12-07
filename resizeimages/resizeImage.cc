@@ -42,20 +42,11 @@ int main(int argc, char ** argv) {
 
   int resize_width = maxX-minX;
   int resize_height = maxY-minY;
-  cout << minX << "  " << resize_width << endl;
-  cout << minY << "  " << resize_height << endl;
+  // cout << minX << "  " << resize_width << endl;
+  // cout << minY << "  " << resize_height << endl;
   Rect cropped(minY, minX, resize_height, resize_width);
   Mat croppedMat = imOrig(cropped);
 
-  // inverted = Scalar::all(255)-imOrig;
-  // float translate[2][3] = {{1, 0, 64-(maxX+minX)/2}, {0,1,64-(maxY+minY)/2}};
-  // Mat translateMat = Mat(2,3, CV_32FC1, &translate);
-  // warpAffine(inverted, imResized, translateMat, Size(128,128));
-
-  // int max = std::max(width, height);
-  // double ratio = 128.0/max;
-  // Size size(128, 128);
-  // if(ratio>1) { //enlarge
   resize(croppedMat, imResized, Size(128,128), (float) originalSize.width/resize_width, (float) originalSize.height/resize_height,  CV_INTER_CUBIC);
   // }
   // else {//shrink
@@ -64,6 +55,6 @@ int main(int argc, char ** argv) {
   // Just gonna do resize 128 x 128 for now 
   // resize(imOrig, imResized, size);
 
-  imwrite("resized"+filename, croppedMat);
+  imwrite("resized"+filename, imResized);
   return 0;
 }
