@@ -1,0 +1,66 @@
+<?xml version="1.0"?>
+<opencv_storage>
+<NumFeatures>5</NumFeatures>
+<Data>
+  <_ type_id="opencv-matrix">
+    <rows>1</rows>
+    <cols>10</cols>
+    <dt>f</dt>
+    <data>
+      74. 53. 88. 92. 39. 111. 37. 112. 48. 81.</data></_>
+  <_ type_id="opencv-matrix">
+    <rows>1</rows>
+    <cols>10</cols>
+    <dt>f</dt>
+    <data>
+      79. 62. 89. 89. 71. 60. 55. 91. 40. 102.</data></_>
+  <_ type_id="opencv-matrix">
+    <rows>1</rows>
+    <cols>10</cols>
+    <dt>f</dt>
+    <data>
+      82. 55. 76. 28. 36. 109. 51. 83. 57. 62.</data></_>
+  <_ type_id="opencv-matrix">
+    <rows>1</rows>
+    <cols>10</cols>
+    <dt>f</dt>
+    <data>
+      77. 53. 42. 106. 55. 82. 74. 61. 44. 106.</data></_>
+  <_ type_id="opencv-matrix">
+    <rows>1</rows>
+    <cols>10</cols>
+    <dt>f</dt>
+    <data>
+      78. 56. 47. 86. 49. 87. 47. 91. 75. 48.</data></_>
+  <_ type_id="opencv-matrix">
+    <rows>1</rows>
+    <cols>10</cols>
+    <dt>f</dt>
+    <data>
+      76. 63. 54. 93. 34. 109. 37. 109. 52. 65.</data></_>
+  <_ type_id="opencv-matrix">
+    <rows>1</rows>
+    <cols>10</cols>
+    <dt>f</dt>
+    <data>
+      80. 57. 91. 99. 28. 99. 44. 80. 55. 59.</data></_>
+  <_ type_id="opencv-matrix">
+    <rows>1</rows>
+    <cols>10</cols>
+    <dt>f</dt>
+    <data>
+      79. 66. 35. 114. 50. 100. 60. 73. 57. 18.</data></_>
+  <_ type_id="opencv-matrix">
+    <rows>1</rows>
+    <cols>10</cols>
+    <dt>f</dt>
+    <data>
+      77. 55. 56. 64. 48. 104. 66. 31. 53. 79.</data></_>
+  <_ type_id="opencv-matrix">
+    <rows>1</rows>
+    <cols>10</cols>
+    <dt>f</dt>
+    <data>
+      76. 57. 58. 60. 59. 90. 49. 107. 47. 106.</data></_></Data>
+<NumExamples>10</NumExamples>
+</opencv_storage>

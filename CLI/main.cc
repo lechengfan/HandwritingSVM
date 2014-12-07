@@ -7,7 +7,9 @@
 #include <dirent.h>
 #include <vector>
 
-#define NUM_FEATURES 128*128
+// #define NUM_FEATURES 128*128
+int num_features;
+bool featuresDefined = false;
 using namespace std;
 using namespace cv;
 
@@ -56,13 +58,18 @@ void printDataDirContents(bool train) {
 
 
 // Loads training examples from src in to dst, labels according to value
-void loadMatrix(FileNode& src, Mat& dst, Mat& labels, int value) {
+bool loadMatrix(FileNode& src, Mat& dst, Mat& labels, int value) {
 	Mat bufMat;
 	for (FileNodeIterator it = src.begin(); it != src.end(); ++it) {
 		(*it) >> bufMat;
+		// if (bufMat.cols != num_features) {
+		// 	cout << "Mismatched feature count" << endl;
+		// 	return false;
+		// }
 		dst.push_back(bufMat);
 		labels.push_back(value);
 	}
+	return true;
 }
 
 // Get and open FileStorage
@@ -86,8 +93,12 @@ bool loadTrainingFile(Mat& trainingExamples, Mat& yMat, int label) {
 	cout << "Please select a training file (these training examples will be labeled " << label << "): " << endl;
 	FileStorage fs;
 	if (!getAndOpenFile(fs, true)) return false;
+	if (!featuresDefined) {
+		fs["NumFeatures"] >> num_features;
+		featuresDefined = true;
+	}
 	FileNode data = fs["Data"];
-	loadMatrix(data, trainingExamples, yMat, label);
+	if (!loadMatrix(data, trainingExamples, yMat, label)) return false;
 	return true;
 }
 
@@ -95,8 +106,7 @@ void trainAll() {
 
 	Mat trainingExamples;
 	Mat yMat;
-
-	int numFeatures, numPos, numNeg;
+	featuresDefined = false;
 
 	int i;
 	cout << "Number of labels? " << endl;

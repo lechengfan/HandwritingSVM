@@ -27,17 +27,18 @@ int getInt(int min, int max) {
 	} while (result < min || result > max);
 }
 
-void getImage(Mat& output, string& filename) {
+void getImage(Mat& output) {
+	string filename;
 	do {
 		cout << "Please enter an image path: ";
 		getline(cin, filename);
-		output = imread(filename, CV_LOAD_IMAGE_COLOR);
-		greyOutput = imread(filename, CV_LOAD_IMAGE_GRAYSCALE);
+		output = imread(filename, CV_LOAD_IMAGE_GRAYSCALE);
 	} while (!output.data && cout << "Invalid image. ");
 }
 
 void getCorners(Mat& input, Mat& output) {
-	goodFeaturesToTrack(input, output, kMaxCorners, 0.02, 1);
+	// Using the harris detector
+	goodFeaturesToTrack(input, output, kMaxCorners, 0.02, 1, /*mask=*/Mat(), /*blockSize=*/3, true, /*k=*/0.04);
 	cout << output << endl;
 }
 
@@ -46,10 +47,8 @@ int main() {
 	Mat img;
 	Mat greyImg;
 	Mat output;
-	string filename;
-	// printPrompt();	
 	while (true) {
-		getImage(img, greyImg,  filename); 
+		getImage(img); 
 		getCorners(img, output);
 	}
 }

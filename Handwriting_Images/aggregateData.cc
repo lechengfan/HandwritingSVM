@@ -6,7 +6,9 @@
 #include <string>
 #include "dirent.h"
 
-#define NUM_FEATURES 128*128
+const int NUM_FEATURES = 128*128;
+// const int numCorners = 7;
+const double qualityLevel = 0.00000000000001;
 
 using namespace std;
 using namespace cv;
@@ -17,7 +19,7 @@ int main(int argc, char *argv[]) {
 		return -1;
 	}
 	string outputFile=argv[1];
-	FileStorage fs(outputFile+".xml", FileStorage::WRITE);
+	FileStorage fs(outputFile + "_pixels" +".xml", FileStorage::WRITE);
 	fs << "NumFeatures" << NUM_FEATURES;
 	fs << "Data" << "[";
 	DIR *dpdf;
@@ -25,7 +27,7 @@ int main(int argc, char *argv[]) {
 	dpdf = opendir(argv[1]);
 	if (dpdf != NULL) {
 		int nExamples=0;
-	while(epdf = readdir(dpdf)) {
+		while(epdf = readdir(dpdf)) {
 			if (strcmp(epdf->d_name, ".") && strcmp(epdf->d_name, "..") && strcmp(epdf->d_name, ".xml")) {
 				string imageFileName = (string(epdf->d_name));
 				cout << imageFileName << endl;
@@ -48,6 +50,8 @@ int main(int argc, char *argv[]) {
 				result = cv::Scalar::all(255) - result;
 				normalize(result, result, 0.0, 1.0, CV_MINMAX, CV_64F);
 				result.convertTo(result, CV_8UC3, 255.0);
+
+				// goodFeaturesToTrack(result, result, numCorners, qualityLevel, 1);
 
 				Mat vectorized = result.reshape(1,1);
 				fs << vectorized;
