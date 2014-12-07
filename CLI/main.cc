@@ -122,10 +122,10 @@ void trainAll() {
 	// - 16 hidden nodes
 	// - one node per output
 	// TODO: Put code for each algorithm in its own executable?
-	Mat layers(3, 1, CV_32S);
+	Mat layers(2, 1, CV_32S);
 	layers.at<int>(0, 0) = 128 * 128; // input layer
-	layers.at<int>(1, 0) = 16; // hidden layer
-	layers.at<int>(2, 0) = 60; // output layer
+	layers.at<int>(1, 0) = 2; // hidden layer
+	layers.at<int>(2, 0) = i; // output layer
 	mlp.create(layers, CvANN_MLP::SIGMOID_SYM, 0.6, 1);
 	CvANN_MLP_TrainParams mlpParams( 	cvTermCriteria(CV_TERMCRIT_ITER+CV_TERMCRIT_EPS, 1000, 0.000001),
 																		CvANN_MLP_TrainParams::BACKPROP,
@@ -141,13 +141,21 @@ void trainAll() {
 		  1 0 0 ]
 	*/
 	int numSamples = yMat.size().height;
-	cout << numSamples << endl;
 	Mat mlpLabels(numSamples, i, DataType<float>::type);
-	for(size_t m = 0; m < numSamples; m++) {
-		Point pt(m, 1);
-		float yVal = yMat.at(pt);
-		mlpLabels.at(m, yVal) = 1;
+	// TODO: Clean up couts
+	cout << "***************" << endl;
+	cout << numSamples << endl;
+	for(int m = 0; m < numSamples; m++) {
+		int yVal = yMat.at<float>(m, 0);
+		for(int n = 0; n < i; n++) {
+			if(yVal == n) {
+				mlpLabels.at<float>(m, n) = 0.0;
+			} else {
+				mlpLabels.at<float>(m, n) = 1.0;
+			}
+		}
 	}
+	cout << mlpLabels << endl;
   /**************** MLP END **********************/
 
 	CvRTParams rtParams;
@@ -184,13 +192,14 @@ pair<int, int> testAll(Mat& testExamples, Mat& expected, char flag) {
 				int numClasses = 3;
 				Mat classificationResult(1, numClasses, CV_32F);
 				mlp.predict(testExamples.row(i), classificationResult);
+				cout << classificationResult << endl;
 				
 				// find the class with the maximum weightage, which indicates
 				// the predicted class
 				int maxIndex = 0;
 				float value = 0.0f;
 				float maxValue = classificationResult.at<float>(0,0);
-				for (int m = 1; m < numClasses; m++) {
+				for (int m = 0; m < numClasses; m++) {
 					value = classificationResult.at<float>(0, m);
 					if (value > maxValue) {
 						maxValue = value;
