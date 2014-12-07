@@ -21,6 +21,7 @@ CvKNearest knn; // Global nearest neighbors object
 CvRTrees rt; // Global random trees object
 CvANN_MLP mlp; // Global multi-layer perceptron
 bool trained = false;
+int num_labels;
 
 // Get the user's desired action
 size_t getCommand() {
@@ -102,6 +103,7 @@ void trainAll() {
 	int i;
 	cout << "Number of labels? " << endl;
 	cin >> i;
+	num_labels = i; // TODO: num_labels is a global that the MLP needs, but it's bad style to use global...
 
 	for (int j = 0; j < i; j++) {
 		loadTrainingFile(trainingExamples, yMat, j);
@@ -122,10 +124,11 @@ void trainAll() {
 	// - 16 hidden nodes
 	// - one node per output
 	// TODO: Put code for each algorithm in its own executable?
-	Mat layers(3, 1, CV_32S);
+	Mat layers(4, 1, CV_32S);
 	layers.at<int>(0, 0) = 128 * 128; // input layer
-	layers.at<int>(1, 0) = 2; // hidden layer
-	layers.at<int>(2, 0) = i; // output layer
+	layers.at<int>(1, 0) = 8; // hidden layer
+	layers.at<int>(2, 0) = 4;
+	layers.at<int>(3, 0) = i; // output layer
 	mlp.create(layers, CvANN_MLP::SIGMOID_SYM, 0.6, 1);
 	CvANN_MLP_TrainParams mlpParams( 	cvTermCriteria(CV_TERMCRIT_ITER+CV_TERMCRIT_EPS, 1000, 0.000001),
 																		CvANN_MLP_TrainParams::BACKPROP,
@@ -143,15 +146,13 @@ void trainAll() {
 	int numSamples = yMat.size().height;
 	Mat mlpLabels(numSamples, i, DataType<float>::type);
 	// TODO: Clean up couts
-	cout << "***************" << endl;
-	cout << numSamples << endl;
 	for(int m = 0; m < numSamples; m++) {
 		int yVal = yMat.at<float>(m, 0);
 		for(int n = 0; n < i; n++) {
 			if(yVal == n) {
-				mlpLabels.at<float>(m, n) = 0.0;
-			} else {
 				mlpLabels.at<float>(m, n) = 1.0;
+			} else {
+				mlpLabels.at<float>(m, n) = 0.0;
 			}
 		}
 	}
@@ -189,10 +190,9 @@ pair<int, int> testAll(Mat& testExamples, Mat& expected, char flag) {
 				break;
 			case('4'): {
 				// source: http://www.nithinrajs.in/ocr-artificial-neural-network-opencv-part-3final-preprocessing/
-				int numClasses = 3;
+				int numClasses = num_labels;
 				Mat classificationResult(1, numClasses, CV_32F);
 				mlp.predict(testExamples.row(i), classificationResult);
-				cout << classificationResult << endl;
 				
 				// find the class with the maximum weightage, which indicates
 				// the predicted class
