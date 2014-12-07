@@ -49,37 +49,62 @@ include CMakeFiles/HW.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/HW.dir/flags.make
 
-CMakeFiles/HW.dir/main.cc.o: CMakeFiles/HW.dir/flags.make
-CMakeFiles/HW.dir/main.cc.o: main.cc
+CMakeFiles/HW.dir/newCLI.cc.o: CMakeFiles/HW.dir/flags.make
+CMakeFiles/HW.dir/newCLI.cc.o: newCLI.cc
 	$(CMAKE_COMMAND) -E cmake_progress_report /root/Max/HandwritingSVM/CLI/CMakeFiles $(CMAKE_PROGRESS_1)
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/HW.dir/main.cc.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/HW.dir/main.cc.o -c /root/Max/HandwritingSVM/CLI/main.cc
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/HW.dir/newCLI.cc.o"
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/HW.dir/newCLI.cc.o -c /root/Max/HandwritingSVM/CLI/newCLI.cc
 
-CMakeFiles/HW.dir/main.cc.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/HW.dir/main.cc.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /root/Max/HandwritingSVM/CLI/main.cc > CMakeFiles/HW.dir/main.cc.i
+CMakeFiles/HW.dir/newCLI.cc.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/HW.dir/newCLI.cc.i"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /root/Max/HandwritingSVM/CLI/newCLI.cc > CMakeFiles/HW.dir/newCLI.cc.i
 
-CMakeFiles/HW.dir/main.cc.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/HW.dir/main.cc.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /root/Max/HandwritingSVM/CLI/main.cc -o CMakeFiles/HW.dir/main.cc.s
+CMakeFiles/HW.dir/newCLI.cc.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/HW.dir/newCLI.cc.s"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /root/Max/HandwritingSVM/CLI/newCLI.cc -o CMakeFiles/HW.dir/newCLI.cc.s
 
-CMakeFiles/HW.dir/main.cc.o.requires:
-.PHONY : CMakeFiles/HW.dir/main.cc.o.requires
+CMakeFiles/HW.dir/newCLI.cc.o.requires:
+.PHONY : CMakeFiles/HW.dir/newCLI.cc.o.requires
 
-CMakeFiles/HW.dir/main.cc.o.provides: CMakeFiles/HW.dir/main.cc.o.requires
-	$(MAKE) -f CMakeFiles/HW.dir/build.make CMakeFiles/HW.dir/main.cc.o.provides.build
-.PHONY : CMakeFiles/HW.dir/main.cc.o.provides
+CMakeFiles/HW.dir/newCLI.cc.o.provides: CMakeFiles/HW.dir/newCLI.cc.o.requires
+	$(MAKE) -f CMakeFiles/HW.dir/build.make CMakeFiles/HW.dir/newCLI.cc.o.provides.build
+.PHONY : CMakeFiles/HW.dir/newCLI.cc.o.provides
 
-CMakeFiles/HW.dir/main.cc.o.provides.build: CMakeFiles/HW.dir/main.cc.o
+CMakeFiles/HW.dir/newCLI.cc.o.provides.build: CMakeFiles/HW.dir/newCLI.cc.o
+
+CMakeFiles/HW.dir/data_store.cc.o: CMakeFiles/HW.dir/flags.make
+CMakeFiles/HW.dir/data_store.cc.o: data_store.cc
+	$(CMAKE_COMMAND) -E cmake_progress_report /root/Max/HandwritingSVM/CLI/CMakeFiles $(CMAKE_PROGRESS_2)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/HW.dir/data_store.cc.o"
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/HW.dir/data_store.cc.o -c /root/Max/HandwritingSVM/CLI/data_store.cc
+
+CMakeFiles/HW.dir/data_store.cc.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/HW.dir/data_store.cc.i"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /root/Max/HandwritingSVM/CLI/data_store.cc > CMakeFiles/HW.dir/data_store.cc.i
+
+CMakeFiles/HW.dir/data_store.cc.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/HW.dir/data_store.cc.s"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /root/Max/HandwritingSVM/CLI/data_store.cc -o CMakeFiles/HW.dir/data_store.cc.s
+
+CMakeFiles/HW.dir/data_store.cc.o.requires:
+.PHONY : CMakeFiles/HW.dir/data_store.cc.o.requires
+
+CMakeFiles/HW.dir/data_store.cc.o.provides: CMakeFiles/HW.dir/data_store.cc.o.requires
+	$(MAKE) -f CMakeFiles/HW.dir/build.make CMakeFiles/HW.dir/data_store.cc.o.provides.build
+.PHONY : CMakeFiles/HW.dir/data_store.cc.o.provides
+
+CMakeFiles/HW.dir/data_store.cc.o.provides.build: CMakeFiles/HW.dir/data_store.cc.o
 
 # Object files for target HW
 HW_OBJECTS = \
-"CMakeFiles/HW.dir/main.cc.o"
+"CMakeFiles/HW.dir/newCLI.cc.o" \
+"CMakeFiles/HW.dir/data_store.cc.o"
 
 # External object files for target HW
 HW_EXTERNAL_OBJECTS =
 
-HW: CMakeFiles/HW.dir/main.cc.o
+HW: CMakeFiles/HW.dir/newCLI.cc.o
+HW: CMakeFiles/HW.dir/data_store.cc.o
 HW: CMakeFiles/HW.dir/build.make
 HW: /usr/lib/x86_64-linux-gnu/libopencv_videostab.so.2.4.9
 HW: /usr/lib/x86_64-linux-gnu/libopencv_video.so.2.4.9
@@ -118,7 +143,8 @@ HW: CMakeFiles/HW.dir/link.txt
 CMakeFiles/HW.dir/build: HW
 .PHONY : CMakeFiles/HW.dir/build
 
-CMakeFiles/HW.dir/requires: CMakeFiles/HW.dir/main.cc.o.requires
+CMakeFiles/HW.dir/requires: CMakeFiles/HW.dir/newCLI.cc.o.requires
+CMakeFiles/HW.dir/requires: CMakeFiles/HW.dir/data_store.cc.o.requires
 .PHONY : CMakeFiles/HW.dir/requires
 
 CMakeFiles/HW.dir/clean:

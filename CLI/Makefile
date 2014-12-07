@@ -111,29 +111,53 @@ HW/fast:
 	$(MAKE) -f CMakeFiles/HW.dir/build.make CMakeFiles/HW.dir/build
 .PHONY : HW/fast
 
-main.o: main.cc.o
-.PHONY : main.o
+data_store.o: data_store.cc.o
+.PHONY : data_store.o
 
 # target to build an object file
-main.cc.o:
-	$(MAKE) -f CMakeFiles/HW.dir/build.make CMakeFiles/HW.dir/main.cc.o
-.PHONY : main.cc.o
+data_store.cc.o:
+	$(MAKE) -f CMakeFiles/HW.dir/build.make CMakeFiles/HW.dir/data_store.cc.o
+.PHONY : data_store.cc.o
 
-main.i: main.cc.i
-.PHONY : main.i
+data_store.i: data_store.cc.i
+.PHONY : data_store.i
 
 # target to preprocess a source file
-main.cc.i:
-	$(MAKE) -f CMakeFiles/HW.dir/build.make CMakeFiles/HW.dir/main.cc.i
-.PHONY : main.cc.i
+data_store.cc.i:
+	$(MAKE) -f CMakeFiles/HW.dir/build.make CMakeFiles/HW.dir/data_store.cc.i
+.PHONY : data_store.cc.i
 
-main.s: main.cc.s
-.PHONY : main.s
+data_store.s: data_store.cc.s
+.PHONY : data_store.s
 
 # target to generate assembly for a file
-main.cc.s:
-	$(MAKE) -f CMakeFiles/HW.dir/build.make CMakeFiles/HW.dir/main.cc.s
-.PHONY : main.cc.s
+data_store.cc.s:
+	$(MAKE) -f CMakeFiles/HW.dir/build.make CMakeFiles/HW.dir/data_store.cc.s
+.PHONY : data_store.cc.s
+
+newCLI.o: newCLI.cc.o
+.PHONY : newCLI.o
+
+# target to build an object file
+newCLI.cc.o:
+	$(MAKE) -f CMakeFiles/HW.dir/build.make CMakeFiles/HW.dir/newCLI.cc.o
+.PHONY : newCLI.cc.o
+
+newCLI.i: newCLI.cc.i
+.PHONY : newCLI.i
+
+# target to preprocess a source file
+newCLI.cc.i:
+	$(MAKE) -f CMakeFiles/HW.dir/build.make CMakeFiles/HW.dir/newCLI.cc.i
+.PHONY : newCLI.cc.i
+
+newCLI.s: newCLI.cc.s
+.PHONY : newCLI.s
+
+# target to generate assembly for a file
+newCLI.cc.s:
+	$(MAKE) -f CMakeFiles/HW.dir/build.make CMakeFiles/HW.dir/newCLI.cc.s
+.PHONY : newCLI.cc.s
 
 # Help Target
 help:
@@ -144,9 +168,12 @@ help:
 	@echo "... HW"
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
-	@echo "... main.o"
-	@echo "... main.i"
-	@echo "... main.s"
+	@echo "... data_store.o"
+	@echo "... data_store.i"
+	@echo "... data_store.s"
+	@echo "... newCLI.o"
+	@echo "... newCLI.i"
+	@echo "... newCLI.s"
 .PHONY : help
 
 

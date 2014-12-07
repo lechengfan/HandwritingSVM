@@ -6,21 +6,29 @@
 
 #IncludeRegexTransform: 
 
-/root/Max/HandwritingSVM/CLI/main.cc
+/root/Max/HandwritingSVM/CLI/data_store.h
+string
+-
 opencv2/opencv.hpp
 -
 opencv2/core/core.hpp
 -
 iostream
 -
-iomanip
+vector
 -
-sstream
--
-stdlib.h
+
+/root/Max/HandwritingSVM/CLI/newCLI.cc
+data_store.h
+/root/Max/HandwritingSVM/CLI/data_store.h
+iostream
 -
 dirent.h
 -
-vector
+opencv2/opencv.hpp
+-
+opencv2/core/core.hpp
+-
+string
 -
 

@@ -6,13 +6,14 @@
 #include <stdlib.h>
 #include <dirent.h>
 #include <vector>
+#include <math.h>
+#include "MLP.h"
 
 #define NUM_FEATURES 128*128
 using namespace std;
 using namespace cv;
 
 const string train_data_dir = "../Handwriting_Images/Train/"; // Global directory for xml data
-// const string test_data_dir = "../data/";
 
 const string test_data_dir = "../Handwriting_Images/Test/";
 
@@ -21,7 +22,11 @@ CvKNearest knn; // Global nearest neighbors object
 CvRTrees rt; // Global random trees object
 CvANN_MLP mlp; // Global multi-layer perceptron
 bool trained = false;
-int num_labels;
+Mat trainingExamples;
+Mat yMat;
+Mat allData; // Loading in all data files
+Mat allLabels; // Loading in all labels
+bool dataLoaded; // Boolean indicating whether data has been loaded
 
 // Get the user's desired action
 size_t getCommand() {
@@ -29,9 +34,10 @@ size_t getCommand() {
 	do {
 		cout <<
 		"Please choose the number of a command:" << endl <<
-		"1. Train all models" << endl <<
-		"2. Make a prediction" << endl <<
-		"3. Exit" << endl <<
+		"1. Load data" << endl <<
+		"2. Train all models" << endl <<
+		"3. Make a prediction" << endl <<
+		"4. Exit" << endl <<
 		" >> " ;
 		cin >> n;
 	} while(n < 1 && n > 3);
@@ -93,19 +99,56 @@ bool loadTrainingFile(Mat& trainingExamples, Mat& yMat, int label) {
 	return true;
 }
 
-void trainAll() {
+void loadData() {
+	int numLabels;
+	cout << "Number of symbols/labels?" << endl;
+	cin >> numLabels;
 
-	Mat trainingExamples;
-	Mat yMat;
+	for (int m = 0; m < numLabels; m++) {
+		loadTrainingFile(allData, allLabels, m);
+	}
 
-	int numFeatures, numPos, numNeg;
+	allData.convertTo(allData, CV_32F);
+	allLabels.convertTo(allLabels, CV_32F);
+}
 
-	int i;
+void partitionDataHelper(int numTraining, int numTesting) {
+	int numSamples = allData.size().height;
+
+	if(numTraining + numTesting >= numSamples) {
+		cout << "Your inputted number of training samples and number of testing samples " <<
+			"is greater than the total number of samples" << endl;
+		return;
+	}
+	// slice out training examples
+	trainingExamples = allData.rowRange(0, numTraining - 1);
+	yMat = allLabels.rowRange(0, numTesting - 1);
+
+
+
+}
+
+void partitionData() {
+	int numSamples = allData.size().height;
+
+	int trainingNum;
+	cout << "You have " << numSamples << ". How many would you like to be used for training?" << endl;
+	cin >> trainingNum;
+
+	double testingNum;
+	cout << "You have " << numSamples << ". How many would you like to be used for testing?" << endl;
+	cin >> testingNum;
+
+	partitionDataHelper(trainingNum, testingNum);
+}
+
+int trainAll() {
+
+	int numLabels;
 	cout << "Number of labels? " << endl;
-	cin >> i;
-	num_labels = i; // TODO: num_labels is a global that the MLP needs, but it's bad style to use global...
+	cin >> numLabels;
 
-	for (int j = 0; j < i; j++) {
+	for (int j = 0; j < numLabels; j++) {
 		loadTrainingFile(trainingExamples, yMat, j);
 	}
 
@@ -123,12 +166,11 @@ void trainAll() {
 	// - one input node per attribute in a sample so 128x128 input nodes
 	// - 16 hidden nodes
 	// - one node per output
-	// TODO: Put code for each algorithm in its own executable?
 	Mat layers(4, 1, CV_32S);
 	layers.at<int>(0, 0) = 128 * 128; // input layer
 	layers.at<int>(1, 0) = 8; // hidden layer
 	layers.at<int>(2, 0) = 4;
-	layers.at<int>(3, 0) = i; // output layer
+	layers.at<int>(3, 0) = numLabels; // output layer
 	mlp.create(layers, CvANN_MLP::SIGMOID_SYM, 0.6, 1);
 	CvANN_MLP_TrainParams mlpParams( 	cvTermCriteria(CV_TERMCRIT_ITER+CV_TERMCRIT_EPS, 1000, 0.000001),
 																		CvANN_MLP_TrainParams::BACKPROP,
@@ -144,11 +186,10 @@ void trainAll() {
 		  1 0 0 ]
 	*/
 	int numSamples = yMat.size().height;
-	Mat mlpLabels(numSamples, i, DataType<float>::type);
-	// TODO: Clean up couts
+	Mat mlpLabels(numSamples, numLabels, DataType<float>::type);
 	for(int m = 0; m < numSamples; m++) {
 		int yVal = yMat.at<float>(m, 0);
-		for(int n = 0; n < i; n++) {
+		for(int n = 0; n < numLabels; n++) {
 			if(yVal == n) {
 				mlpLabels.at<float>(m, n) = 1.0;
 			} else {
@@ -156,7 +197,6 @@ void trainAll() {
 			}
 		}
 	}
-	cout << mlpLabels << endl;
   /**************** MLP END **********************/
 
 	CvRTParams rtParams;
@@ -169,9 +209,10 @@ void trainAll() {
 
 	cout << "Should be trained now!" << endl;
 	trained = true;
+	return numLabels;
 }
 
-pair<int, int> testAll(Mat& testExamples, Mat& expected, char flag) {
+pair<int, int> testAll(Mat& testExamples, Mat& expected, char flag, int numLabels) {
 	int total = 0;
 	int wrong = 0;
 	// Storage for mlp
@@ -190,7 +231,7 @@ pair<int, int> testAll(Mat& testExamples, Mat& expected, char flag) {
 				break;
 			case('4'): {
 				// source: http://www.nithinrajs.in/ocr-artificial-neural-network-opencv-part-3final-preprocessing/
-				int numClasses = num_labels;
+				int numClasses = numLabels;
 				Mat classificationResult(1, numClasses, CV_32F);
 				mlp.predict(testExamples.row(i), classificationResult);
 				
@@ -221,7 +262,7 @@ pair<int, int> testAll(Mat& testExamples, Mat& expected, char flag) {
 	return pair<int, int>(total, wrong);
 }
 
-void predictAll() {
+void predictAll(int numLabels) {
 	if (!trained) {
 		cout << "Model not trained yet!" << endl;	
 		return;
@@ -252,7 +293,7 @@ void predictAll() {
 
 		// Test everything!
 		pair<int, int> results;
-		results = testAll(testExamples, labels, opt);
+		results = testAll(testExamples, labels, opt, numLabels);
 
 		if (results.first == -1) {
 			cout << "Invalid option." << endl;
@@ -269,14 +310,17 @@ void predictAll() {
 int main() {
 	// Print out prompt
 	cout << "Welcome to HandwritingSVM" << endl;
+	int numLabels;
 	while(true) {
 		int n = getCommand();
 		if (n == 1) {
-			// Train
-			trainAll();
+			loadData();
 		} else if (n == 2) {
+			// Train
+			numLabels = trainAll();
+		} else if (n == 3) {
 			// Predict
-			predictAll();
+			predictAll(numLabels);
 		} else {
 			break;
 		}

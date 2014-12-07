@@ -1,5 +1,6 @@
 FILE(REMOVE_RECURSE
-  "CMakeFiles/HW.dir/main.cc.o"
+  "CMakeFiles/HW.dir/newCLI.cc.o"
+  "CMakeFiles/HW.dir/data_store.cc.o"
   "HW.pdb"
   "HW"
 )

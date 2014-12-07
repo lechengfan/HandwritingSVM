@@ -59,7 +59,7 @@ CMAKE_BINARY_DIR = /root/Max/HandwritingSVM/CLI
 CMakeFiles/HW.dir/all:
 	$(MAKE) -f CMakeFiles/HW.dir/build.make CMakeFiles/HW.dir/depend
 	$(MAKE) -f CMakeFiles/HW.dir/build.make CMakeFiles/HW.dir/build
-	$(CMAKE_COMMAND) -E cmake_progress_report /root/Max/HandwritingSVM/CLI/CMakeFiles  1
+	$(CMAKE_COMMAND) -E cmake_progress_report /root/Max/HandwritingSVM/CLI/CMakeFiles  1 2
 	@echo "Built target HW"
 .PHONY : CMakeFiles/HW.dir/all
 
@@ -69,7 +69,7 @@ all: CMakeFiles/HW.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/HW.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /root/Max/HandwritingSVM/CLI/CMakeFiles 1
+	$(CMAKE_COMMAND) -E cmake_progress_start /root/Max/HandwritingSVM/CLI/CMakeFiles 2
 	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/HW.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /root/Max/HandwritingSVM/CLI/CMakeFiles 0
 .PHONY : CMakeFiles/HW.dir/rule
