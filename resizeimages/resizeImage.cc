@@ -40,8 +40,8 @@ int main(int argc, char ** argv) {
   }  
   
 
-  int width = maxX-minX;
-  int height = maxY-minY;
+  int resize_width = maxX-minX;
+  int resize_height = maxY-minY;
   inverted = Scalar::all(255)-imOrig;
   float translate[2][3] = {{1, 0, 64-(maxX+minX)/2}, {0,1,64-(maxY+minY)/2}};
   Mat translateMat = Mat(2,3, CV_32FC1, &translate);
@@ -51,7 +51,7 @@ int main(int argc, char ** argv) {
   // double ratio = 128.0/max;
   // Size size(128, 128);
   // if(ratio>1) { //enlarge
-  //   resize(imOrig, imResized, Size(), ratio, ratio,  CV_INTER_CUBIC);
+    resize(inverted, imResized, Size(128,128), (float) originalSize.width/resize_width, (float) originalSize.height/resize_height,  CV_INTER_CUBIC);
   // }
   // else {//shrink
   //   resize(imOrig, imResized, Size(), ratio, ratio,  CV_INTER_AREA);
