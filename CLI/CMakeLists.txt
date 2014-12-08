@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 2.8)
 project( HW )
 find_package( OpenCV REQUIRED)
-add_executable( HW main.cc)
+add_executable( HW newCLI.cc mlp.h mlp.cc data_store.h data_store.cc svm.h svm.cc rf.h rf.cc knn.h knn.cc)
 target_link_libraries( HW ${OpenCV_LIBS} )
