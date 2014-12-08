@@ -5,6 +5,10 @@
 
 class LearningModel {
 	public:
-		virtual void train(const cv::Mat& trainingSamples, const cv::Mat&trainingLabels, int numLabels);
-		virtual void predict(const cv::Mat & testSamples, const cv::Mat& testLabels, cv::Mat& results);
+    LearningModel();
+		virtual void train(const cv::Mat& trainingSamples, const cv::Mat&trainingLabels, int numLabels) = 0;
+		virtual bool predict(const cv::Mat & testSamples, const cv::Mat& testLabels, cv::Mat& results);
+
+  private:
+    bool trained;
 };

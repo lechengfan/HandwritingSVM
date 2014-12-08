@@ -7,50 +7,59 @@ using namespace std;
 DataStore::DataStore() {
   numTrainingSamplesPerSymbol = 0;
   numTestingSamplesPerSymbol = 0;
+  numLabels = 0;
 }
 
-void DataStore::add(cv::Mat& data) {
-  cv::Mat copy = data.clone();
+void DataStore::add(cv::Mat& newData) {
+  cv::Mat copy = newData.clone();
   data.push_back(copy);
+  numLabels++;
 }
 
 void DataStore::clear() {
   data.clear();
-}
-
-bool DataStore::partitionData(int trainingSamples, int testSamples) {
-  // Error checking
-  size_t smallestSampleSize = getSmallestSampleSize();
-  if (trainingSamples + testSamples > smallestSampleSize) {
-    return false;
-  }
-
-  if(!partitionDataForTraining(trainingSamples)) return false;
-  if(!partitionDataForTesting(testSamples)) return false;
+  numLabels = 0;
 }
 
 bool DataStore::partitionDataForTraining(int numTrainingSamples) {
   if(numTrainingSamples > getSmallestSampleSize() - numTestingSamplesPerSymbol) return false;
+  numTrainingSamplesPerSymbol = numTrainingSamples; // set private instance variable
+  trainingSamples.release();
+  trainingLabels.release();
+
 
   size_t numSymbols = data.size();
   // loop through all symbols
   for(size_t m = 0; m < numSymbols; m++) {
-    trainingSamples.push_back(data[m].rowRange(0, m));
+    trainingSamples.push_back(data[m].rowRange(0, numTrainingSamplesPerSymbol));
+    for(size_t n = 0; n < numTrainingSamplesPerSymbol; n++) {
+      trainingLabels.push_back((int)m);
+    }
   }
-  numTrainingSamplesPerSymbol = numTrainingSamples;
+  trainingSamples.convertTo(trainingSamples, CV_32F);
+  trainingLabels.convertTo(trainingLabels, CV_32F);
   return true;
 }
 
 bool DataStore::partitionDataForTesting(int numTestSamples) {
   if(numTestSamples > getSmallestSampleSize() - numTrainingSamplesPerSymbol) return false;
+  numTestingSamplesPerSymbol = numTestSamples;
+  testSamples.release();
+  testLabels.release();
 
   size_t numSymbols = data.size();
   // loop through all symbols
-  testSamples.release();
   for(size_t m = 0; m < numSymbols; m++) {
-    testSamples.push_back(data[m].rowRange(numSymbols - 1 - numTestSamples, numSymbols - 1));
+    size_t numSamples = data[m].size().height;
+    cv::Mat row = data[m].rowRange(numSamples - 1 - numTestSamples, numSamples - 1);
+    testSamples.push_back(row);
+    for(size_t n = 0; n < numTestSamples; n++) {
+      testLabels.push_back((int)m);
+    }
   }
-  numTestingSamplesPerSymbol = numTestSamples;
+
+  testSamples.convertTo(testSamples, CV_32F);
+  testLabels.convertTo(testLabels, CV_32F);
   return true;
 }
 
@@ -68,6 +77,10 @@ cv::Mat& DataStore::getTestSamples() {
 
 cv::Mat& DataStore::getTestLabels() {
   return testLabels;
+}
+
+size_t DataStore::getNumLabels() {
+  return numLabels;
 }
 
 size_t DataStore::getSmallestSampleSize() {

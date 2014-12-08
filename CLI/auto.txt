@@ -1,13 +1,14 @@
 1
+Lambda_train.xml Phi_train.xml Zeta_train.xml
 2
-Lambda_train.xml
-Phi_train.xml
+20 10
+3
+4
+1
+4
 2
 4
-Lambda_test.xml
-0
-Y
-Phi_test.xml
-1
-N
-exit
+3
+4
+4
+6

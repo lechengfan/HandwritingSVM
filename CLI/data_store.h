@@ -15,7 +15,6 @@ class DataStore {
     void clear();
 
     /* Returns true if the partitionw was updated. False otherwise. */
-    bool partitionData(int trainingSamples, int testSamples);
     bool partitionDataForTraining(int numTrainingSamples);
     bool partitionDataForTesting(int numTestSamples);
 
@@ -24,9 +23,12 @@ class DataStore {
     cv::Mat& getTestSamples();
     cv::Mat& getTestLabels();
 
+    size_t getNumLabels();
+
   private:
     size_t numTrainingSamplesPerSymbol;
     size_t numTestingSamplesPerSymbol;
+    size_t numLabels;
     std::vector<cv::Mat> data;
     cv::Mat trainingSamples;
     cv::Mat trainingLabels;

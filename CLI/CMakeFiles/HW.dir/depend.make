@@ -4,6 +4,22 @@
 CMakeFiles/HW.dir/data_store.cc.o: data_store.cc
 CMakeFiles/HW.dir/data_store.cc.o: data_store.h
 
+CMakeFiles/HW.dir/knn.cc.o: knn.cc
+CMakeFiles/HW.dir/knn.cc.o: knn.h
+
+CMakeFiles/HW.dir/mlp.cc.o: mlp.cc
+CMakeFiles/HW.dir/mlp.cc.o: mlp.h
+
 CMakeFiles/HW.dir/newCLI.cc.o: data_store.h
+CMakeFiles/HW.dir/newCLI.cc.o: knn.h
+CMakeFiles/HW.dir/newCLI.cc.o: mlp.h
 CMakeFiles/HW.dir/newCLI.cc.o: newCLI.cc
+CMakeFiles/HW.dir/newCLI.cc.o: rf.h
+CMakeFiles/HW.dir/newCLI.cc.o: svm.h
+
+CMakeFiles/HW.dir/rf.cc.o: rf.cc
+CMakeFiles/HW.dir/rf.cc.o: rf.h
+
+CMakeFiles/HW.dir/svm.cc.o: svm.cc
+CMakeFiles/HW.dir/svm.cc.o: svm.h
 

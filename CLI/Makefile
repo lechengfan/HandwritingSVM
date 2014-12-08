@@ -135,6 +135,54 @@ data_store.cc.s:
 	$(MAKE) -f CMakeFiles/HW.dir/build.make CMakeFiles/HW.dir/data_store.cc.s
 .PHONY : data_store.cc.s
 
+knn.o: knn.cc.o
+.PHONY : knn.o
+
+# target to build an object file
+knn.cc.o:
+	$(MAKE) -f CMakeFiles/HW.dir/build.make CMakeFiles/HW.dir/knn.cc.o
+.PHONY : knn.cc.o
+
+knn.i: knn.cc.i
+.PHONY : knn.i
+
+# target to preprocess a source file
+knn.cc.i:
+	$(MAKE) -f CMakeFiles/HW.dir/build.make CMakeFiles/HW.dir/knn.cc.i
+.PHONY : knn.cc.i
+
+knn.s: knn.cc.s
+.PHONY : knn.s
+
+# target to generate assembly for a file
+knn.cc.s:
+	$(MAKE) -f CMakeFiles/HW.dir/build.make CMakeFiles/HW.dir/knn.cc.s
+.PHONY : knn.cc.s
+
+mlp.o: mlp.cc.o
+.PHONY : mlp.o
+
+# target to build an object file
+mlp.cc.o:
+	$(MAKE) -f CMakeFiles/HW.dir/build.make CMakeFiles/HW.dir/mlp.cc.o
+.PHONY : mlp.cc.o
+
+mlp.i: mlp.cc.i
+.PHONY : mlp.i
+
+# target to preprocess a source file
+mlp.cc.i:
+	$(MAKE) -f CMakeFiles/HW.dir/build.make CMakeFiles/HW.dir/mlp.cc.i
+.PHONY : mlp.cc.i
+
+mlp.s: mlp.cc.s
+.PHONY : mlp.s
+
+# target to generate assembly for a file
+mlp.cc.s:
+	$(MAKE) -f CMakeFiles/HW.dir/build.make CMakeFiles/HW.dir/mlp.cc.s
+.PHONY : mlp.cc.s
+
 newCLI.o: newCLI.cc.o
 .PHONY : newCLI.o
 
@@ -159,6 +207,54 @@ newCLI.cc.s:
 	$(MAKE) -f CMakeFiles/HW.dir/build.make CMakeFiles/HW.dir/newCLI.cc.s
 .PHONY : newCLI.cc.s
 
+rf.o: rf.cc.o
+.PHONY : rf.o
+
+# target to build an object file
+rf.cc.o:
+	$(MAKE) -f CMakeFiles/HW.dir/build.make CMakeFiles/HW.dir/rf.cc.o
+.PHONY : rf.cc.o
+
+rf.i: rf.cc.i
+.PHONY : rf.i
+
+# target to preprocess a source file
+rf.cc.i:
+	$(MAKE) -f CMakeFiles/HW.dir/build.make CMakeFiles/HW.dir/rf.cc.i
+.PHONY : rf.cc.i
+
+rf.s: rf.cc.s
+.PHONY : rf.s
+
+# target to generate assembly for a file
+rf.cc.s:
+	$(MAKE) -f CMakeFiles/HW.dir/build.make CMakeFiles/HW.dir/rf.cc.s
+.PHONY : rf.cc.s
+
+svm.o: svm.cc.o
+.PHONY : svm.o
+
+# target to build an object file
+svm.cc.o:
+	$(MAKE) -f CMakeFiles/HW.dir/build.make CMakeFiles/HW.dir/svm.cc.o
+.PHONY : svm.cc.o
+
+svm.i: svm.cc.i
+.PHONY : svm.i
+
+# target to preprocess a source file
+svm.cc.i:
+	$(MAKE) -f CMakeFiles/HW.dir/build.make CMakeFiles/HW.dir/svm.cc.i
+.PHONY : svm.cc.i
+
+svm.s: svm.cc.s
+.PHONY : svm.s
+
+# target to generate assembly for a file
+svm.cc.s:
+	$(MAKE) -f CMakeFiles/HW.dir/build.make CMakeFiles/HW.dir/svm.cc.s
+.PHONY : svm.cc.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -171,9 +267,21 @@ help:
 	@echo "... data_store.o"
 	@echo "... data_store.i"
 	@echo "... data_store.s"
+	@echo "... knn.o"
+	@echo "... knn.i"
+	@echo "... knn.s"
+	@echo "... mlp.o"
+	@echo "... mlp.i"
+	@echo "... mlp.s"
 	@echo "... newCLI.o"
 	@echo "... newCLI.i"
 	@echo "... newCLI.s"
+	@echo "... rf.o"
+	@echo "... rf.i"
+	@echo "... rf.s"
+	@echo "... svm.o"
+	@echo "... svm.i"
+	@echo "... svm.s"
 .PHONY : help
 
 
